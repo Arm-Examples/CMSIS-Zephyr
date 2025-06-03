@@ -1,0 +1,34 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-configure"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-configure.rule"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/M55_HE.Debug+AE722F80F55D5LS/src/M55_HE.Debug+AE722F80F55D5LS-stamp/M55_HE.Debug+AE722F80F55D5LS-configure.rule"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/M55_HE.Debug+AE722F80F55D5LS/src/M55_HE.Debug+AE722F80F55D5LS-stamp/M55_HE.Debug+AE722F80F55D5LS-patch.rule"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/M55_HE.Debug+AE722F80F55D5LS/src/M55_HE.Debug+AE722F80F55D5LS-stamp/M55_HE.Debug+AE722F80F55D5LS-update.rule"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/M55_HE.Debug+AE722F80F55D5LS/src/M55_HE.Debug+AE722F80F55D5LS-stamp/M55_HE.Debug+AE722F80F55D5LS-download.rule"
+		},
+		{
+			"file" : "C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/M55_HE.Debug+AE722F80F55D5LS/src/M55_HE.Debug+AE722F80F55D5LS-stamp/M55_HE.Debug+AE722F80F55D5LS-mkdir.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"M55_HE.Debug+AE722F80F55D5LS"
+		],
+		"name" : "M55_HE.Debug+AE722F80F55D5LS-configure"
+	}
+}

@@ -1,0 +1,119 @@
+build:
+  generated-by: csolution version 2.9.0
+  solution: ../Blank_solution.csolution.yml
+  project: M55_HE.cproject.yml
+  context: M55_HE.Debug+AE722F80F55D5LS
+  compiler: AC6
+  board: Alif Semiconductor::DevKit-E7:Gen 2
+  board-pack: AlifSemiconductor::Ensemble@1.3.4
+  board-books:
+    - name: https://alifsemi.com/support/kits/ensemble-devkit-gen2/
+      title: Ensemble DevKit Gen 2 Web Page
+      category: overview
+  device: Alif Semiconductor::AE722F80F55D5LS:M55_HE
+  device-pack: AlifSemiconductor::Ensemble@1.3.4
+  device-books:
+    - name: https://alifsemi.com/download/ADTS0005
+      title: E7 Datasheet
+    - name: https://alifsemi.com/download/AHRM0005
+      title: E7 Hardware Reference Manual
+    - name: https://alifsemi.com/download/ASRM0001
+      title: Software Reference Manual
+  processor:
+    dsp: on
+    endian: little
+    fpu: dp
+    mve: fp
+    core: Cortex-M55
+  packs:
+    - pack: ARM::CMSIS@6.1.0
+      path: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0
+    - pack: AlifSemiconductor::Ensemble@1.3.4
+      path: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4
+  optimize: none
+  debug: on
+  misc:
+    ASM:
+      - -masm=auto
+    C:
+      - -std=gnu11
+      - -Wno-macro-redefined
+      - -Wno-pragma-pack
+      - -Wno-parentheses-equality
+      - -Wno-license-management
+    CPP:
+      - -Wno-macro-redefined
+      - -Wno-pragma-pack
+      - -Wno-parentheses-equality
+      - -Wno-license-management
+    Link:
+      - --entry=Reset_Handler
+      - --info summarysizes
+      - --summary_stderr
+      - --diag_suppress=L6314W
+  define:
+    - M55_HE
+    - _RTE_
+  define-asm:
+    - M55_HE
+    - _RTE_
+  add-path:
+    - RTE/_Debug_AE722F80F55D5LS
+    - ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+    - ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Device/core/M55_HE/include
+  add-path-asm:
+    - RTE/_Debug_AE722F80F55D5LS
+    - ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+    - ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Device/core/M55_HE/include
+  output-dirs:
+    intdir: ../tmp
+    outdir: ../out/M55_HE/AE722F80F55D5LS/Debug
+    rtedir: RTE
+  output:
+    - type: elf
+      file: M55_HE.axf
+  components:
+    - component: ARM::CMSIS:CORE@6.1.0
+      condition: ARMv6_7_8-M Device
+      from-pack: ARM::CMSIS@6.1.0
+      selected-by: ARM::CMSIS:CORE
+      files:
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+          category: include
+          version: 6.1.0
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include/tz_context.h
+          category: header
+          version: 6.1.0
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Template/ARMv8-M/main_s.c
+          category: sourceC
+          attr: template
+          version: 1.1.1
+          select: Secure mode 'main' module for ARMv8-M
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Template/ARMv8-M/tz_context.c
+          category: sourceC
+          attr: template
+          version: 1.1.1
+          select: RTOS Context Management (TrustZone for ARMv8-M)
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Documentation/html/Core/index.html
+          category: doc
+          version: 6.1.0
+  linker:
+    script: RTE/Device/AE722F80F55D5LS_M55_HE/ac6_linker_script.sct.src
+    regions: RTE/Device/AE722F80F55D5LS_M55_HE/regions_DevKit-E7.h
+  groups:
+    - group: Source Files
+      files:
+        - file: main.c
+          category: sourceC
+  constructed-files:
+    - file: RTE/_Debug_AE722F80F55D5LS/RTE_Components.h
+      category: header
+  licenses:
+    - license: <unknown>
+      packs:
+        - pack: AlifSemiconductor::Ensemble@1.3.4
+    - license: Apache-2.0
+      packs:
+        - pack: ARM::CMSIS@6.1.0
+      components:
+        - component: ARM::CMSIS:CORE@6.1.0
