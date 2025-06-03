@@ -1,0 +1,17 @@
+build-idx:
+  generated-by: csolution version 2.9.0
+  cdefault: ${CMSIS_COMPILER_ROOT}/cdefault.yml
+  csolution: Blank_solution.csolution.yml
+  tmpdir: tmp
+  cprojects:
+    - cproject: M55_HE/M55_HE.cproject.yml
+    - cproject: M55_HP/M55_HP.cproject.yml
+  cbuilds:
+    - cbuild: M55_HE/M55_HE.Debug+AE722F80F55D5LS.cbuild.yml
+      project: M55_HE
+      configuration: .Debug+AE722F80F55D5LS
+      messages:
+        info:
+          - Blank_solution.cbuild-pack.yml - file is already up-to-date
+          - Blank_solution+AE722F80F55D5LS.cbuild-run.yml - file generated successfully
+          - M55_HE.Debug+AE722F80F55D5LS.cbuild.yml - file is already up-to-date

@@ -1,0 +1,150 @@
+cbuild-run:
+  generated-by: csolution version 2.9.0
+  solution: Blank_solution.csolution.yml
+  target-type: AE722F80F55D5LS
+  compiler: AC6
+  board: Alif Semiconductor::DevKit-E7:Gen 2
+  board-pack: AlifSemiconductor::Ensemble@1.3.4
+  device: Alif Semiconductor::AE722F80F55D5LS
+  device-pack: AlifSemiconductor::Ensemble@1.3.4
+  output:
+    - file: out/M55_HE/AE722F80F55D5LS/Debug/M55_HE.axf
+      info: generate by M55_HE.Debug+AE722F80F55D5LS
+      type: elf
+      load: image+symbols
+      pname: M55_HE
+  system-resources:
+    memory:
+      - name: MRAM
+        access: rx
+        start: 0x80000000
+        size: 0x00580000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM0
+        access: rwx
+        start: 0x02000000
+        size: 0x00400000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM1
+        access: rwx
+        start: 0x08000000
+        size: 0x00280000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM2
+        access: rwx
+        start: 0x50000000
+        size: 0x00040000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM3
+        access: rwx
+        start: 0x50800000
+        size: 0x00100000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM4
+        access: rwx
+        start: 0x58000000
+        size: 0x00040000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM5
+        access: rwx
+        start: 0x58800000
+        size: 0x00040000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM6_A
+        access: rwx
+        start: 0x62000000
+        size: 0x00100000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM6_B
+        access: rwx
+        start: 0x62400000
+        size: 0x00100000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM7
+        access: rwx
+        start: 0x63000000
+        size: 0x00080000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM8
+        access: rwx
+        start: 0x63200000
+        size: 0x00200000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+      - name: SRAM9
+        access: rwx
+        start: 0x60000000
+        size: 0x000C0000
+        from-pack: AlifSemiconductor::Ensemble@1.3.4
+  system-descriptions:
+    - file: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Debug/SVD/AE722F80F55D5LS_CM55_HE_View.svd
+      type: svd
+      pname: M55_HE
+    - file: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Debug/SVD/AE722F80F55D5LS_CM55_HP_View.svd
+      type: svd
+      pname: M55_HP
+  debugger:
+    name: CMSIS-DAP@pyOCD
+    protocol: swd
+    clock: 10000000
+    start-pname: M55_HE
+    gdbserver:
+      - port: 3333
+        pname: M55_HE
+      - port: 3334
+        pname: M55_HP
+  debug-sequences:
+    - name: DisableWarmResetHandshake
+      blocks:
+        - execute: |
+            Write32(0x1A601024, 0);
+      pname: M55_HE
+    - name: DisableWarmResetHandshake
+      blocks:
+        - execute: |
+            Write32(0x1A600024, 0);
+      pname: M55_HP
+    - name: DebugDeviceUnlock
+      blocks:
+        - execute: |
+            DAP_Delay(500000);  // Delay for 500ms
+    - name: ResetSystem
+      blocks:
+        - execute: |
+            Sequence("DisableWarmResetHandshake");
+        - execute: |
+            // System Control Space (SCS) offset as defined in Armv6-M/Armv7-M.
+
+            __var SCS_Addr   = 0xE000E000;
+            __var AIRCR_Addr = SCS_Addr + 0xD0C;
+            __var DHCSR_Addr = SCS_Addr + 0xDF0;
+
+            // Execute SYSRESETREQ via AIRCR
+            Write32(AIRCR_Addr, 0x05FA0004);
+        - while: (Read32(DHCSR_Addr) & 0x02000000)
+          timeout: 500000
+  programming:
+    - algorithm: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Flash/algorithms/Ensemble.FLM
+      start: 0x80000000
+      size: 0x00580000
+      ram-start: 0x00000000
+      ram-size: 0x00020000
+    - algorithm: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Flash/algorithms/Ensemble_IS25WX256.FLM
+      start: 0xC0000000
+      size: 0x02000000
+      ram-start: 0x00000000
+      ram-size: 0x00040000
+  debug-topology:
+    debugports:
+      - dpid: 0
+        accessports:
+          - apid: 0
+            address: 0x00200000
+          - apid: 1
+            address: 0x00300000
+    processors:
+      - pname: M55_HP
+        apid: 0
+      - pname: M55_HE
+        apid: 1
+    dormant: true
+    sdf: ${CMSIS_PACK_ROOT}/AlifSemiconductor/Ensemble/1.3.4/Debug/SDF/E7/Ensemble E7.sdf

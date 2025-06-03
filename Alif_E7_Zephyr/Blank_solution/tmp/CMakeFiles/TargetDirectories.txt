@@ -1,0 +1,8 @@
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/database.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-build.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-configure.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-executes.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/M55_HE.Debug+AE722F80F55D5LS-database.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/edit_cache.dir
+C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution/tmp/CMakeFiles/rebuild_cache.dir
