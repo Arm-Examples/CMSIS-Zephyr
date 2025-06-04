@@ -11,9 +11,9 @@ This example project is created in Keil Studio VS Code with the blank solution t
 More details can be found in [Zephzr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
 
 # Steps to (re-)build and debug the Zephyr Hello World example
-1. In VS Code, open the folder containing the west.yml and csolution.yml files, e.g. *./STM32H7B3I-DK_Zephyr/Blank_Solution*
+1. In VS Code, open the folder *./STM32H7B3I-DK_Zephyr/Blank_Solution*
 2. In VS Code, open a terminal and run the command ```west init -l --mf west.yml``` and then the command ```west update```
-3. Now the required modules with Zephyr are downloaded from the repo and the West Workspace is initialized locally in the *./STM32H7B3I-DK_Zephyr* folder
+   - Now the required modules with Zephyr are downloaded from the repo and the West Workspace is initialized locally in the *./STM32H7B3I-DK_Zephyr* folder
 4. In CMSIS View, press the **"Refresh (reload packs, update RTE)"** button to generate missing files and dependencies for CMSIS Solution
 5. Make sure there are no red errors in the status bar and press the **"Build solution"** button to build the Hello World example
    - The entire executed ```west build``` command can be found in the csolution.yml file under the **"executes:"** node
