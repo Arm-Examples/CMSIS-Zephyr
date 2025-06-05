@@ -3,11 +3,12 @@ This example project is created in Keil Studio VS Code with the blank solution t
 Follow these steps to (re-)build the Zephyr image to use with this example project:
 1. Install dependencies to your PC: python3, python3-pip, wget, cmake, ninja
 2. Install west and pyelftools with this command ```python3 -m pip install west pyelftools``` 
-3. Add all these executable directory to PATH environment variable
-4. create a new folder e.g. called sdk-alif-main
-5. go into sdk-alif-main folder and run the command ```west init -m https://github.com/alifsemi/sdk-alif.git --mr main``` and then the command ```west update```
-6. Now the entire alif sdk together with zephyr are downloaded from the repo and initialized locally in the sdk-alif-main folder
-7. go to the zephyr subfolder inside the sdk-alif-main folder, run the command to build the hello world example: ```west build -p auto -b alif_e7_dk_rtss_he samples/hello_world -DCONFIG_DEBUG=y```. This is meant for MRAM executed by HE core of Alif E7-DK
+3. Add all these executable directory to PATH environment variable   
+4. To reuse the Arm GNU compiler toolchain installed by vcpkg in Keil Studio VS Code, add system environment variables ```ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb``` and ```GNUARMEMB_TOOLCHAIN_PATH=C:\Users\chetan01\.vcpkg\artifacts\2139c4c6\compilers.arm.arm.none.eabi.gcc\14.2.1```
+5. create a new folder e.g. called sdk-alif-main
+6. go into sdk-alif-main folder and run the command ```west init -m https://github.com/alifsemi/sdk-alif.git --mr main``` and then the command ```west update```
+7. Now the entire alif sdk together with zephyr are downloaded from the repo and initialized locally in the sdk-alif-main folder
+8. go to the zephyr subfolder inside the sdk-alif-main folder, run the command to build the hello world example: ```west build -p auto -b alif_e7_dk_rtss_he samples/hello_world -DCONFIG_DEBUG=y```. This is meant for MRAM executed by HE core of Alif E7-DK
 
 More details can be found in https://github.com/alifsemi/sdk-alif/releases/download/v1.3.0/user_guide.pdf
 
