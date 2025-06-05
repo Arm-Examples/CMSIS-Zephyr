@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Initialize Zephyr West Workspace",
+			"type": "shell",
+			"command": "west init -l --mf west.yml",
+		},
+		{
+			"label": "Update Zephyr West Workspace",
+			"type": "shell",
+			"command": "west update",
+		}
+	]
+}
