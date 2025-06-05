@@ -12,12 +12,13 @@ More details can be found in [Zephzr Getting Started Guide](https://docs.zephyrp
 
 # Steps to (re-)build and debug the Zephyr Hello World example
 1. In VS Code, open the folder *./STM32H7B3I-DK_Zephyr/Blank_Solution*
-2. In VS Code, open a terminal and run the command ```west init -l --mf west.yml``` and then the command ```west update```
+2. Initialize West Workspace: In menu bar "Terminal" > "Run Task" > "Initialize Zephyr west workspace"
+3. Update West Workspace: In menu bar "Terminal" > "Run Task" > "Update Zephyr west workspace"
    - Now the required modules with Zephyr are downloaded from the repo and the West Workspace is initialized locally in the *./STM32H7B3I-DK_Zephyr* folder
 4. In CMSIS View, press the **"Refresh (reload packs, update RTE)"** button to generate missing files and dependencies for CMSIS Solution
 5. Make sure there are no red errors in the status bar and press the **"Build solution"** button to build the Hello World example
    - The entire executed ```west build``` command can be found in the csolution.yml file under the **"executes:"** node
    - The built images will be located in the folder: *./STM32H7B3I-DK_Zephyr/Blank_Solution/build*
-   - The build process might take a while. In the terminal, you can see that the command ```"west build"``` has been executed successfully. However, an error occurred because the Arm Compiler cannot build a Zephyr example.
+   - !!! The build process might take a while. In the terminal, you can see that the command ```"west build"``` has been executed successfully. However, an error occurred because the Arm Compiler cannot build a Zephyr example. !!!
 7. Connect the STM32H7B3I-DK board to your device and start the CMSIS Debugger for debugging
 
