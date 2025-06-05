@@ -1,0 +1,5 @@
+project:
+  groups:
+    - group: Source Files
+      files:
+        - file: ../zephyr/samples/hello_world/src/main.c
