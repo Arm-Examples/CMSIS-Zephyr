@@ -37,14 +37,6 @@ solution:
       run: "${CMAKE_COMMAND} -E copy ../build_M55_HP/rtss_hp/zephyr/zephyr.elf
         ../out/M55_HP/AE722F80F55D5LS/M55_HP.axf"
       always:
-    - execute: Copy_M55_HE_forAlifSDK
-      run: "${CMAKE_COMMAND} -E copy ../build_M55_HE/rtss_he/zephyr/zephyr.bin
-        C:/Alif-Security-Kit/app-release-exec/build/images/zephyr_he.bin "
-      always:
-    - execute: Copy_M55_HP_forAlifSDK
-      run: "${CMAKE_COMMAND} -E copy ../build_M55_HP/rtss_hp/zephyr/zephyr.bin
-        C:/Alif-Security-Kit/app-release-exec/build/images/zephyr_hp.bin "
-      always:
 
         # List related projects.
   projects:

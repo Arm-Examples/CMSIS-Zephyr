@@ -33,6 +33,24 @@
             }
         },
         {
+            "name": "M55_HP CMSIS_DAP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/",
+            "program": "out/M55_HP/AE722F80F55D5LS/M55_HP.axf",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "monitor reset halt",
+                "tbreak main"
+            ],
+            "target": {
+                "port": "3334"
+            },
+            "cmsis": {
+                "updateConfiguration": "manual"
+            }
+        },
+        {
             "name": "M55_HE CMSIS_DAP@pyOCD (attach)",
             "type": "gdbtarget",
             "request": "attach",
@@ -50,24 +68,6 @@
             },
             "cmsis": {
                 "updateConfiguration": "auto"
-            }
-        },
-        {
-            "name": "M55_HP CMSIS_DAP@pyOCD (attach)",
-            "type": "gdbtarget",
-            "request": "attach",
-            "cwd": "${workspaceFolder}/",
-            "program": "out/M55_HP/AE722F80F55D5LS/M55_HP.axf",
-            "gdb": "arm-none-eabi-gdb",
-            "initCommands": [
-                "monitor reset halt",
-                "tbreak main"
-            ],
-            "target": {
-                "port": "3334"
-            },
-            "cmsis": {
-                "updateConfiguration": "manual"
             }
         }
     ]

@@ -2,16 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-			"label": "Initialize Zephyr west workspace",
-			"type": "shell",
-			"command": "west init -m https://github.com/alifsemi/sdk-alif.git --mr main",
-		},
-		{
-			"label": "Update Zephyr west workspace",
-			"type": "shell",
-			"command": "west update",
-		},
-        {
             "label": "CMSIS Erase",
             "type": "shell",
             "command": "pyocd",
