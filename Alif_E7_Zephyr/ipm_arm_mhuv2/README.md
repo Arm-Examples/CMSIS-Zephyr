@@ -21,12 +21,12 @@ More details can be found in [Zephzr Getting Started Guide](https://docs.zephyrp
    - The entire executed ```west build``` command can be found in the csolution.yml file under the **"executes:"** node
    - The built images will be located in the folder: *./Alif_E7_Zephyr/IPM_dualcore/build_M55_HE* and *build_M55_HP*
    - !!! The build process might take a while. In the terminal, you can see that the command ```"west build"``` has been executed successfully. However, an error occurred because the Arm Compiler cannot build a Zephyr example. !!!
-7. Connect the Alif DK-E7 board to your device and flash the images using [Alif Security Toolkit](https://alifsemi.com/support/kits/ensemble-devkit/)
-   - Use Alif Toolkit to generate the Applications Table of Contents (ATOC) and flash both images to the target with the following commands:
+7. Connect the Alif DK-E7 board to your device and use [Alif Security Toolkit](https://alifsemi.com/support/kits/ensemble-devkit/) to flash the images
+   - Use Alif Toolkit to generate the Applications Table of Contents (ATOC), then flash both images to the target using these commands:
       - ```app-gen-toc -f build/config/app-cfg.json```
       - ```app-write-mram -e app```
       - ```app-write-mram -a```
    - Remember to configure the **app-cfg.json** and **app-device-config.json** files before generating the ATOC
-8. Start the CMSIS Debugger for debugging
+8. Start the CMSIS Debugger for dual-core debugging
    - Start the **M55_HE CMSIS_DAP@pyOCD (launch)** debug session first, followed by the **M55_HP CMSIS_DAP@pyOCD (attach)** debug session.
 
