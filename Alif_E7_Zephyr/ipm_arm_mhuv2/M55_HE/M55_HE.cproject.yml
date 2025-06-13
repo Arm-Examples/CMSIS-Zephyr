@@ -1,0 +1,6 @@
+project:
+  device: :M55_HE
+  groups:
+    - group: Source Files M55_HE
+      files:
+        - file: ../alif/samples/drivers/ipm/ipm_arm_mhuv2/rtss_he/src/for_rtss_hp_mhu0.c

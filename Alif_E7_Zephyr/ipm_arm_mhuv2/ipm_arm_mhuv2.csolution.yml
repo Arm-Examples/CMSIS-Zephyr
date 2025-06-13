@@ -1,0 +1,54 @@
+# A solution is a collection of related projects that share same base configuration.
+solution:
+
+  packs:
+    - pack: AlifSemiconductor::Ensemble
+    - pack: ARM::CMSIS
+
+  # List different hardware targets that are used to deploy the solution.
+  target-types:
+    - type: AE722F80F55D5LS
+      board: DevKit-E7:Gen 2
+      device: AE722F80F55D5LS
+      target-set:
+        - set:
+          debugger:
+            name: CMSIS-DAP
+            start-pname: M55_HE
+          images:
+            - project-context: M55_HE
+            - project-context: M55_HP
+  executes:
+    - execute: GenImage_M55_HE
+      run: "west build -d ../build_M55_HE/ -p auto -b alif_e7_dk_rtss_he
+        ../alif/samples/drivers/ipm/ipm_arm_mhuv2/ -DCONFIG_DEBUG=y
+        -DCONFIG_DEBUG_THREAD_INFO=y -DSE_SERVICES=OFF -DRTSS_HP_MHU0=ON"
+      always:
+    - execute: GenImage_M55_HP
+      run: "west build -d ../build_M55_HP/ -p auto -b alif_e7_dk_rtss_hp
+        ../alif/samples/drivers/ipm/ipm_arm_mhuv2/ -DCONFIG_DEBUG=y
+        -DCONFIG_DEBUG_THREAD_INFO=y -DSE_SERVICES=OFF -DRTSS_HE_MHU0=ON"
+      always:
+    - execute: Rename_M55_HE
+      run: "${CMAKE_COMMAND} -E copy ../build_M55_HE/rtss_he/zephyr/zephyr.elf
+        ../out/M55_HE/AE722F80F55D5LS/M55_HE.axf"
+      always:
+    - execute: Rename_M55_HP
+      run: "${CMAKE_COMMAND} -E copy ../build_M55_HP/rtss_hp/zephyr/zephyr.elf
+        ../out/M55_HP/AE722F80F55D5LS/M55_HP.axf"
+      always:
+    - execute: Copy_M55_HE_forAlifSDK
+      run: "${CMAKE_COMMAND} -E copy ../build_M55_HE/rtss_he/zephyr/zephyr.bin
+        C:/Alif-Security-Kit/app-release-exec/build/images/zephyr_he.bin "
+      always:
+    - execute: Copy_M55_HP_forAlifSDK
+      run: "${CMAKE_COMMAND} -E copy ../build_M55_HP/rtss_hp/zephyr/zephyr.bin
+        C:/Alif-Security-Kit/app-release-exec/build/images/zephyr_hp.bin "
+      always:
+
+        # List related projects.
+  projects:
+    - project: ./M55_HE/M55_HE.cproject.yml
+    - project: ./M55_HP/M55_HP.cproject.yml
+
+  compiler: AC6
