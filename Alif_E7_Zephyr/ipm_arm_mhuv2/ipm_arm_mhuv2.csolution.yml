@@ -18,6 +18,8 @@ solution:
           images:
             - project-context: M55_HE
             - project-context: M55_HP
+
+  # Call "west build" to compile and copy the images to the default folder required by the CMSIS Debugger.
   executes:
     - execute: GenImage_M55_HE
       run: "west build -d ../build_M55_HE/ -p auto -b alif_e7_dk_rtss_he
@@ -38,7 +40,7 @@ solution:
         ../out/M55_HP/AE722F80F55D5LS/M55_HP.axf"
       always:
 
-        # List related projects.
+  # List related projects.
   projects:
     - project: ./M55_HE/M55_HE.cproject.yml
     - project: ./M55_HP/M55_HP.cproject.yml
