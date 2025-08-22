@@ -29,8 +29,8 @@ In VS Code use the menu command **Terminal - Run Tasks** and execute:
 3. Update West Workspace: run the command ```west update```
    - Now the required modules with Zephyr and Alif are downloaded from the repo and the West Workspace is initialized locally in the *./Alif_E7_Zephyr/ipm_arm_mhuv2* folder
 4. In VS Code, open the folder *./Alif_E7_Zephyr/ipm_arm_mhuv2*
-5. In CMSIS View, press the `Refresh (reload packs, update RTE)` button to generate the missing files and make sure there are no red errors in the status bar 
-6. and press the **"Build solution"** button to build the MHUv2 example
+5. In CMSIS View, press the `Refresh (reload packs, update RTE)` button to generate the missing files and make sure there are no more red errors in the status bar
+6. Press the **"Build solution"** button to build the MHUv2 example
    - The entire executed ```west build``` command can be found in the csolution.yml file under the **"executes:"** node
    - The built images will be located in the folder: *./Alif_E7_Zephyr/ipm_arm_mhuv2/build_M55_HE* and *build_M55_HP*
    - !!! The build process might take a while. !!!
