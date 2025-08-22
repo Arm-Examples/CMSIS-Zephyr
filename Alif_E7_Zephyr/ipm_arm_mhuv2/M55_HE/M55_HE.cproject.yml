@@ -1,6 +1,20 @@
+# A project translates into one executable or library.
 project:
   device: :M55_HE
+
+  # List of source groups and files added to a project or a layer.
   groups:
-    - group: Source Files M55_HE
+    - group: Source Files
       files:
-        - file: ../alif/samples/drivers/ipm/ipm_arm_mhuv2/rtss_he/src/for_rtss_hp_mhu0.c
+        - file: ./main.c
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: CMSIS:CORE
+    - component: Device:Startup
+
+  # List executable file formats to be generated.
+  output:
+    type:
+      - elf

@@ -2,11 +2,35 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "M55_HP CMSIS_DAP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/",
+            "program": "build_M55_HP\\rtss_hp\\zephyr\\zephyr.elf",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "monitor reset halt",
+                "tbreak main"
+            ],
+            "customResetCommands": [
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
+            ],
+            "target": {
+                "port": "3334"
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "manual"
+            }
+        },
+        {
             "name": "M55_HE CMSIS_DAP@pyOCD (launch)",
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/M55_HE/AE722F80F55D5LS/M55_HE.axf",
+            "program": "build_M55_HE\\rtss_he\\zephyr\\zephyr.elf",
             "gdb": "arm-none-eabi-gdb",
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
@@ -14,16 +38,24 @@
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "pyocd",
                 "serverParameters": [
+                    "gdbserver",
                     "--probe",
                     "cmsisdap:",
                     "--connect",
                     "attach",
-                    "--persist"
+                    "--persist",
+                    "--cbuild-run",
+                    "${command:cmsis-csolution.getCbuildRunFile}",
+                    "--quiet",
+                    "--log",
+                    "*.cbuild_run,*server=info"
                 ],
                 "port": "3333"
             },
@@ -33,40 +65,25 @@
             }
         },
         {
-            "name": "M55_HP CMSIS_DAP@pyOCD (attach)",
-            "type": "gdbtarget",
-            "request": "attach",
-            "cwd": "${workspaceFolder}/",
-            "program": "out/M55_HP/AE722F80F55D5LS/M55_HP.axf",
-            "gdb": "arm-none-eabi-gdb",
-            "initCommands": [
-                "monitor reset halt",
-                "tbreak main"
-            ],
-            "target": {
-                "port": "3334"
-            },
-            "cmsis": {
-                "updateConfiguration": "manual"
-            }
-        },
-        {
             "name": "M55_HE CMSIS_DAP@pyOCD (attach)",
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/M55_HE/AE722F80F55D5LS/M55_HE.axf",
+            "program": "build_M55_HE\\rtss_he\\zephyr\\zephyr.elf",
             "gdb": "arm-none-eabi-gdb",
             "initCommands": [
                 ""
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "3333"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         }
