@@ -19,7 +19,6 @@ solution:
             clock: 10000000
             start-pname: M55_HE
           images:
-            # Update paths to point to the correct ELF files for your project.
             - image: ./build_M55_HE/rtss_he/zephyr/zephyr.elf
               device: :M55_HE
             - image: ./build_M55_HP/rtss_hp/zephyr/zephyr.elf
@@ -39,14 +38,6 @@ solution:
       run: "west build -d ../build_M55_HP/ -p auto -b alif_e7_dk_rtss_hp
         ../alif/samples/drivers/ipm/ipm_arm_mhuv2/ -DCONFIG_DEBUG=y
         -DCONFIG_DEBUG_THREAD_INFO=y -DSE_SERVICES=OFF -DRTSS_HE_MHU0=ON"
-      always:
-    - execute: Rename_M55_HE
-      run: "${CMAKE_COMMAND} -E copy ../build_M55_HE/rtss_he/zephyr/zephyr.elf
-        ../out/M55_HE/AE722F80F55D5LS/M55_HE.axf"
-      always:
-    - execute: Rename_M55_HP
-      run: "${CMAKE_COMMAND} -E copy ../build_M55_HP/rtss_hp/zephyr/zephyr.elf
-        ../out/M55_HP/AE722F80F55D5LS/M55_HP.axf"
       always:
       
   # List related projects.
