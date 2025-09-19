@@ -1,5 +1,7 @@
 This example project is created in Keil Studio VS Code for Alif DK-E7 board. The debug launch.json file is adapted to load the elf image built by Zephyr West tool to be debugged by CMSIS-debugger extension.
 
+# About Zephyr System Build
+
 This example is extended from [CMSIS-Zephyr/Alif_E7_Zephyr/ipm_arm_mhuv2](https://github.com/Arm-Examples/CMSIS-Zephyr/tree/main/Alif_E7_Zephyr/ipm_arm_mhuv2) with Zephyr [System build](https://docs.zephyrproject.org/latest/build/sysbuild/index.html#sysbuild-system-build). Sysbuild is a system-level build mechanism that allows multiple cores or images to be built together in one unified process. It manages configuration and artifacts for all domains (i.e., projects), so developers can run a single `west build --sysbuild` instead of handling each core separately.
 
 To enable SysBuild with multiple domains, you must provide a `sysbuild.cmake` file in the primary domain (in this case, **rtss_he**). This file registers the additional project **rtss_hp** so it can be built together:
@@ -69,4 +71,5 @@ In VS Code use the menu command **Terminal - Run Tasks** and execute:
    - !!! The build process might take a while. !!!
 7. Start the CMSIS Debugger for dual-core debugging
    - Start the **M55_HE CMSIS_DAP@pyOCD (launch)** debug session first, followed by the **M55_HP CMSIS_DAP@pyOCD (attach)** debug session.
+
 
