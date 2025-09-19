@@ -1,0 +1,47 @@
+# A solution is a collection of related projects that share same base configuration.
+solution:
+
+  packs:
+    - pack: AlifSemiconductor::Ensemble@^2.0.0-0
+    - pack: ARM::CMSIS
+
+  # List different hardware targets that are used to deploy the solution.
+  target-types:
+    - type: DevKit-E7
+      board: Alif Semiconductor::DevKit-E7
+      device: Alif Semiconductor::AE722F80F55D5LS
+      target-set:
+        - set:
+          debugger:
+            name: CMSIS-DAP@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 10000000
+            start-pname: M55_HE
+          images:
+            - image: ./build_DualCores/rtss_he/zephyr/zephyr.elf
+              device: :M55_HE
+            - image: ./build_DualCores/rtss_hp/zephyr/zephyr.elf
+              device: :M55_HP
+            - project-context: M55_HE
+              load: none
+            - project-context: M55_HP
+              load: none
+
+  executes:
+    - execute: SystemBuild
+      run: west build -d ../build_DualCores/ -b alif_e7_dk_rtss_he
+        -p auto --sysbuild ../rtss_he --
+        -Drtss_he_CONFIG_DEBUG=y -Drtss_he_CONFIG_DEBUG_THREAD_INFO=y
+        -Drtss_hp_CONFIG_DEBUG=y -Drtss_hp_CONFIG_DEBUG_THREAD_INFO=y
+        -Drtss_he_SE_SERVICES:BOOL=OFF -Drtss_he_RTSS_HP_MHU0:BOOL=ON
+        -Drtss_hp_SE_SERVICES:BOOL=OFF -Drtss_hp_RTSS_HE_MHU0:BOOL=ON
+      always:
+      
+  # List related projects.
+  projects:
+
+    - project: ./M55_HE/M55_HE.cproject.yml
+    - project: ./M55_HP/M55_HP.cproject.yml
+
+  compiler: AC6
