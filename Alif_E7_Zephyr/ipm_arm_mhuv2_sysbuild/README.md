@@ -33,7 +33,7 @@ However, there is a known issue with passing CMake variables in this way, as des
 zephyr_get(SE_SERVICES)
 zephyr_get(RTSS_HP_MHU0)
 ```
-After applying this workaround, both build artifacts for rtss_he and rtss_hp will be generated under the folder *./build_DualCores/* by using one `west build` command.
+After applying this workaround, both build artifacts for rtss_he and rtss_hp will be generated under the folder *./build_DualCores/<domainName>/* by using one `west build` command.
 
 # Steps to setup Zephyr environment
 1. Install dependencies to your PC: python3, python3-pip, wget, cmake, ninja
@@ -71,5 +71,6 @@ In VS Code use the menu command **Terminal - Run Tasks** and execute:
    - !!! The build process might take a while. !!!
 7. Start the CMSIS Debugger for dual-core debugging
    - Start the **M55_HE CMSIS_DAP@pyOCD (launch)** debug session first, followed by the **M55_HP CMSIS_DAP@pyOCD (attach)** debug session.
+
 
 
