@@ -1,3 +1,7 @@
+> **NOTE**
+>
+>  This repository is now replaced with https://github.com/Open-CMSIS-Pack/Zephyr-Alif
+
 # CMSIS-Zephyr
 This repository contains examples showing how to use the Arm CMSIS Debugger with Zephyr-based projects.
 
