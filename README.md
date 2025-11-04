@@ -4,29 +4,6 @@ This repository contains examples for the
 [STMicroelectronics B-U585I-IOT02A](https://www.keil.arm.com/boards/stmicroelectronics-b-u585i-iot02a-revc-c3bc599/features/)
 development board showing how to use the Arm CMSIS Debugger with Zephyr-based projects.
 
-## Repository structure
-
-```txt
-  📦
-  ┣ 📂 Examples                     Example projects
-     ┣ 📂 Blinky                    [Project that blinks an LED](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/basic/blinky)
-        ┣ 📄 blinky.csolution.yml   CMSIS solution file that contains the device and board settings for the blinky project.
-        ┗ 📄 blinky.cproject.yml    Empty CMSIS project file (project settings are controlled via Zephyr project).
-     ┗ 📂 Threads                   [Project that spawns multiple compile-time threads](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/basic/threads)
-        ┣ 📄 threads.csolution.yml  CMSIS solution file that contains the device and board settings for the threads project.
-        ┗ 📄 threads.cproject.yml   Empty CMSIS project file (project settings are controlled via Zephyr project).
-  ┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
-  ┣ 📄 LICENSE                      Apache 2.0 license file.
-  ┣ 📄 README.md                    This README file.
-  ┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg that orchestrates the CMSIS build tools.
-  ┗ 📄 west.yml                     The west manifest configuration file defines project dependencies of a west workspace.
-```
-
-> [!NOTE]
-> Both examples are simply copied from the
-> [Zephyr Samples](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples) directory. You can do the same for
-> any of the Zephyr sample projects.
-
 ## Prerequisites
 
 You need to install the following tools on your machine.
@@ -51,6 +28,35 @@ You need to install the following tools on your machine.
 
 > [!NOTE]
 > More details can be found in [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html).
+
+## Repository structure
+
+```txt
+  📦
+  ┣ 📂 Examples                     Example projects
+     ┣ 📂 Blinky                    Project that blinks an LED.
+        ┣ 📄 blinky.csolution.yml   CMSIS solution file that contains the device and board
+                                    settings for the blinky project.
+        ┗ 📄 blinky.cproject.yml    Empty CMSIS project file (project settings are controlled
+                                    via Zephyr project).
+     ┗ 📂 Threads                   Project that spawns multiple compile-time threads.
+        ┣ 📄 threads.csolution.yml  CMSIS solution file that contains the device and board
+                                    settings for the threads project.
+        ┗ 📄 threads.cproject.yml   Empty CMSIS project file (project settings are controlled
+                                    via Zephyr project).
+  ┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
+  ┣ 📄 LICENSE                      Apache 2.0 license file.
+  ┣ 📄 README.md                    This README file.
+  ┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg that orchestrates the CMSIS
+                                    build tools.
+  ┗ 📄 west.yml                     The west manifest configuration file defines project
+                                    dependencies of a west workspace.
+```
+
+> [!NOTE]
+> Both examples are simply copied from the
+> [Zephyr Samples](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples) directory. You can do the same for
+> any of the Zephyr sample projects.
 
 ## Steps to build and debug the Zephyr example
 
