@@ -11,6 +11,7 @@ solution:
   target-types:
     - type: B-U585I-IOT02A
       board: STMicroelectronics::B-U585I-IOT02A
+      device: STMicroelectronics::STM32U585AIIx
       target-set:
         - set:
           debugger:
