@@ -32,7 +32,7 @@ You need to install the following tools on your machine.
 ## Repository structure
 
 ```txt
-📦
+🗄
 ┣ 📂 Examples                     Example projects
 ┃  ┣ 📂 Blinky                    Project that blinks an LED.
 ┃  ┃  ┣ 📄 blinky.csolution.yml   CMSIS solution file with device and board settings.
@@ -86,7 +86,7 @@ You need to install the following tools on your machine.
 
    **Windows**
 
-   Set `ZEPHYR_BASE` to `C:/.../Zephyr-Workspace/zephyr` in
+   Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
    [Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).
   
 > [!NOTE]
