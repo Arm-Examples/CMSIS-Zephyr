@@ -1,0 +1,39 @@
+# A solution is a collection of related projects that share same base configuration.
+solution:
+
+  # List the packs that define the device and/or board.
+  packs:
+    - pack: Keil::STM32U5xx_DFP
+    - pack: Keil::B-U585I-IOT02A_BSP
+    - pack: ARM::CMSIS
+
+  # List different hardware targets that are used to deploy the solution.
+  target-types:
+    - type: B-U585I-IOT02A
+      board: STMicroelectronics::B-U585I-IOT02A
+      target-set:
+        - set:
+          debugger:
+            name: ST-Link@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 10000000
+          images:
+            - project-context: blinky.Debug
+
+  # List of different build configurations.
+  build-types:
+    - type: Debug
+      west-defs:
+        - CONFIG_DEBUG: y
+        - CONFIG_DEBUG_THREAD_INFO: y
+        - CONFIG_DEBUG_OPTIMIZATIONS: y
+    - type: Release
+      west-defs:
+        - CONFIG_SIZE_OPTIMIZATIONS: y
+
+  # List related projects.
+  projects:
+    - west:
+        app-path: ./blinky
+  compiler: GCC

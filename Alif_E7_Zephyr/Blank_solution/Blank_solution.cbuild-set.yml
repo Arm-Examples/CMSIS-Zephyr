@@ -1,5 +1,0 @@
-cbuild-set:
-  generated-by: vscode-cmsis-csolution version 1.53.0
-  environment: {}
-  contexts:
-    - context: M55_HE.Debug+AE722F80F55D5LS
