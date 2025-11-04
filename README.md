@@ -32,29 +32,23 @@ You need to install the following tools on your machine.
 ## Repository structure
 
 ```txt
-  📦
-  ┣ 📂 Examples                     Example projects
-     ┣ 📂 Blinky                    Project that blinks an LED.
-        ┣ 📄 blinky.csolution.yml   CMSIS solution file that contains the device and board
-                                    settings for the blinky project.
-        ┗ 📄 blinky.cproject.yml    Empty CMSIS project file (project settings are controlled
-                                    via Zephyr project).
-     ┗ 📂 Threads                   Project that spawns multiple compile-time threads.
-        ┣ 📄 threads.csolution.yml  CMSIS solution file that contains the device and board
-                                    settings for the threads project.
-        ┗ 📄 threads.cproject.yml   Empty CMSIS project file (project settings are controlled
-                                    via Zephyr project).
-  ┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
-  ┣ 📄 LICENSE                      Apache 2.0 license file.
-  ┣ 📄 README.md                    This README file.
-  ┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg that orchestrates the CMSIS
-                                    build tools.
-  ┗ 📄 west.yml                     The west manifest configuration file defines project
-                                    dependencies of a west workspace.
+📦
+┣ 📂 Examples                     Example projects
+┃  ┣ 📂 Blinky                    Project that blinks an LED.
+┃  ┃  ┣ 📄 blinky.csolution.yml   CMSIS solution file with device and board settings.
+┃  ┃  ┗ 📄 blinky.cproject.yml    Empty CMSIS project file.
+┃  ┗ 📂 Threads                   Project that spawns multiple compile-time threads.
+┃     ┣ 📄 threads.csolution.yml  CMSIS solution file with device and board settings.
+┃     ┗ 📄 threads.cproject.yml   Empty CMSIS project file.
+┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
+┣ 📄 LICENSE                      Apache 2.0 license file.
+┣ 📄 README.md                    This README file.
+┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg.
+┗ 📄 west.yml                     west manifest configuration file.
 ```
 
 > [!NOTE]
-> Both examples are simply copied from the
+> Both examples are copied from the
 > [Zephyr Samples](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples) directory. You can do the same for
 > any of the Zephyr sample projects.
 
