@@ -1,43 +1,35 @@
 # CMSIS-Zephyr
 
-This repository contains examples for the
-[STMicroelectronics B-U585I-IOT02A](https://www.keil.arm.com/boards/stmicroelectronics-b-u585i-iot02a-revc-c3bc599/features/)
-development board showing how to use the Arm CMSIS Debugger with Zephyr-based projects.
+This repository contains an exemplary CMSIS solution file that can be used to build two Zephyr basic examples on two
+different development boards. It can be easily adapted to other boards or examples. It uses Zephyr's `west` build
+system to create the executable file for an application and the
+[Arm CMSIS Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.vscode-cmsis-debugger) to flash download
+and run the image on the target hardware.
 
-## Repository structure
+## Quick start
 
-```txt
-🗄
-┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
-┣ 📄 LICENSE                      Apache 2.0 license file.
-┣ 📄 README.md                    This README file.
-┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg.
-┣ 📄 west.yml                     west manifest configuration file.
-┗ 📄 zephyr.csolution.yml         CMSIS solution file with examples and board settings.
-```
-
-## Steps to build and debug the Zephyr example
-
-1. Clone or download this repository onto your machine.
-
+1. Clone this repository onto your machine.
 2. In a terminal, change the current directory to `./CMSIS-Zephyr`.
-
 3. Follow Zephyr's
    [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide).
 
-4. In the same terminal/shell (which has sourced the Python virtual environment), start VS code:
+   > [!ATTENTION]
+   > Run the `west init` and `west update` commands without "zephyrproject"!
+
+4. From the same terminal, start VS Code:
 
    ```sh
    code .
    ```
 
-   This will make sure that the virtual environment is present in your VS Code instance.
+   > [!NOTE]
+   > - Make sure that the virtual environment is still sourced.
+   > - Starting VS Code from here ensures that the virtual environment is present in your VS Code instance.
 
-1. In the CMSIS view, click on **...** and use **Select Active Solution from workspace** to choose the project you want to work on.
-
-2. Press the **Build solution** button to build the example.
-
-3. Start the CMSIS Debugger.
+5. In the CMSIS view, click on **...**, use **Select Active Solution from workspace**, and choose "zephyr".
+6. Press the **Manage Solution Settings** button. In the dialog, select the target board and application.
+7. Press the **Build solution** button to build the example.
+8. Start the CMSIS Debugger.
 
 ## Switch to a different board
 
@@ -75,10 +67,10 @@ Zephyr board name like this:
 > Make sure to delete the previous `/out` and `/tmp` directories before saving the updated `*.csolution.yml` file,
 > otherwise the solution might not load correctly.
 
-## If you have a Zephyr environment
+## Using an existing Zephyr environment
 
-To use the `west` tools for projects located in different folders, set the `ZEPHYR_BASE` environment variable to the
-`./CMSIS-Zephyr/zephyrproject/zephyr` folder:
+If you have previously set up your Zephyr environment, set the `ZEPHYR_BASE` environment variable to the
+`/zephyrproject/zephyr` folder:
 
 ### Linux
 
@@ -98,7 +90,9 @@ source ~/.zshrc
 
 Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
 [Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).
-  
+
+Now, open a terminal window and continue with the fourth item in the [Quick start](#quick-start) section.
+
 > [!NOTE]
-> Make sure you restart VS Code. Do not just close the active window, otherwise the `ZEPHYR_BASE` will not the set
-> correctly.
+> You need to adapt the paths to the examples in the `zephyr.csolution.yml` file to the location of your Zephyr
+> installation.
