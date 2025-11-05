@@ -80,3 +80,10 @@ uv2csolution.log
 
 # legacy intermediate project file
 *.cprj
+
+# Zephyr directories
+bootloader/
+modules/
+tools/
+zephyr/
+.west/
