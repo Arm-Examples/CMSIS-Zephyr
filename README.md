@@ -13,8 +13,8 @@ and run the image on the target hardware.
 3. Follow Zephyr's
    [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide).
 
-   > [!ATTENTION]
-   > Run the `west init` and `west update` commands without "zephyrproject"!
+> [!ATTENTION]
+> Run the `west init` and `west update` commands without "zephyrproject"!
 
 4. From the same terminal, start VS Code:
 
@@ -22,9 +22,9 @@ and run the image on the target hardware.
    code .
    ```
 
-   > [!NOTE]
-   > - Make sure that the virtual environment is still sourced.
-   > - Starting VS Code from here ensures that the virtual environment is present in your VS Code instance.
+> [!NOTE]
+> - Make sure that the virtual environment is still sourced.
+> - Starting VS Code from here ensures that the virtual environment is present in your VS Code instance.
 
 5. In the CMSIS view, click on **...**, use **Select Active Solution from workspace**, and choose "zephyr".
 6. Press the **Manage Solution Settings** button. In the dialog, select the target board and application.
