@@ -12,6 +12,6 @@ manifest:
         name-allowlist:
           - cmsis
           - cmsis-dsp
-          # - picolibc
+          - picolibc
           # - segger
           - hal_stm32

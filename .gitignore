@@ -76,6 +76,7 @@ uv2csolution.log
 .vscode/launch.json
 .vscode/tasks.json
 .vscode/settings.json
+.vscode/cmsis.json
 
 # legacy intermediate project file
 *.cprj

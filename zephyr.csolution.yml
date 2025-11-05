@@ -3,24 +3,40 @@ solution:
 
   # List the packs that define the device and/or board.
   packs:
+    - pack: ARM::CMSIS
+    - pack: Keil::STM32L4xx_DFP
+    - pack: Keil::B-L475E-IOT01A_BSP
     - pack: Keil::STM32U5xx_DFP
     - pack: Keil::B-U585I-IOT02A_BSP
-    - pack: ARM::CMSIS
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
+    - type: B-L475-IOT01A
+      board: STMicroelectronics::B-L475E-IOT01A
+      device: STMicroelectronics::STM32L475VGTx
+      variables:
+        - west-board: disco_l475_iot1
+      target-set:
+        - set:
+          images:
+            - project-context: blinky.Debug
+          debugger:
+            name: ST-Link@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 4000000
     - type: B-U585I-IOT02A
       board: STMicroelectronics::B-U585I-IOT02A
       device: STMicroelectronics::STM32U585AIIx
       target-set:
         - set:
+          images:
+            - project-context: threads.Debug
           debugger:
             name: ST-Link@pyOCD
             port: 3333
             protocol: swd
-            clock: 10000000
-          images:
-            - project-context: threads.Debug
+            clock: 4000000
 
   # List of different build configurations.
   build-types:
@@ -36,5 +52,7 @@ solution:
   # List related projects.
   projects:
     - west:
-        app-path: ./threads
+        app-path: ./zephyr/samples/basic/blinky
+    - west:
+        app-path: ./zephyr/samples/basic/threads
   compiler: GCC

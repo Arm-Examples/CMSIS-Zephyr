@@ -4,94 +4,34 @@ This repository contains examples for the
 [STMicroelectronics B-U585I-IOT02A](https://www.keil.arm.com/boards/stmicroelectronics-b-u585i-iot02a-revc-c3bc599/features/)
 development board showing how to use the Arm CMSIS Debugger with Zephyr-based projects.
 
-## Prerequisites
-
-You need to install the following tools on your machine.
-
-1. Install dependencies:
-   - `python3`
-   - `python3-pip`
-
-2. Install `west` and `pyelftools`:
-
-   ```sh
-   python3 -m pip install west pyelftools
-   ```
-
-3. Verify the `west` installation by running:
-
-   ```sh
-   west --version
-   ```
-
-   In case you see the error `west: command not found`, add the `west` executable to your `PATH` variable.
-
-> [!NOTE]
-> More details can be found in [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html).
-
 ## Repository structure
 
 ```txt
 🗄
-┣ 📂 Examples                     Example projects
-┃  ┣ 📂 Blinky                    Project that blinks an LED.
-┃  ┃  ┣ 📄 blinky.csolution.yml   CMSIS solution file with device and board settings.
-┃  ┃  ┗ 📄 blinky.cproject.yml    Empty CMSIS project file.
-┃  ┗ 📂 Threads                   Project that spawns multiple compile-time threads.
-┃     ┣ 📄 threads.csolution.yml  CMSIS solution file with device and board settings.
-┃     ┗ 📄 threads.cproject.yml   Empty CMSIS project file.
 ┣ 📄 .gitignore                   Git ignore file with CMSIS-specific settings.
 ┣ 📄 LICENSE                      Apache 2.0 license file.
 ┣ 📄 README.md                    This README file.
 ┣ 📄 vcpkg-configuration.json     Configuration file for vcpkg.
-┗ 📄 west.yml                     west manifest configuration file.
+┣ 📄 west.yml                     west manifest configuration file.
+┗ 📄 zephyr.csolution.yml         CMSIS solution file with examples and board settings.
 ```
-
-> [!NOTE]
-> Both examples are copied from the
-> [Zephyr Samples](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples) directory. You can do the same for
-> any of the Zephyr sample projects.
 
 ## Steps to build and debug the Zephyr example
 
-1. Open the folder `./CMSIS-Zephyr` in VS code.
+1. Clone or download this repository onto your machine.
 
-2. In Terminal, initialize and update the Zephyr workspace, if none exists:
+2. In a terminal, change the current directory to `./CMSIS-Zephyr`.
 
-   ```sh
-   mkdir -p zephyrproject
-   west init ./zephyrproject
-   cd ./zephyrproject
-   west update 
-   ```
+3. Follow Zephyr's
+   [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide).
 
-   Now, the standard Zephyr modules can be found under the `./CMSIS-Zephyr/zephyrproject` folder.
-
-3. To use the `west` tools for projects located in different folders, set the `ZEPHYR_BASE` environment variable to the
-   `./CMSIS-Zephyr/zephyrproject/zephyr` folder:
-
-   **Linux**
+4. In the same terminal/shell (which has sourced the Python virtual environment), start VS code:
 
    ```sh
-   (echo; echo 'export ZEPHYR_BASE="/home/.../zephyrproject/zephyr"') >> ~/.bashrc
-   source ~/.bashrc
+   code .
    ```
 
-   **macOS**
-
-   ```sh
-   (echo; echo 'export ZEPHYR_BASE="/usr/.../zephyrproject/zephyr"') >> ~/.zshrc
-   source ~/.zshrc
-   ```
-
-   **Windows**
-
-   Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
-   [Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).
-  
-> [!NOTE]
-> Make sure you restart VS Code. Do not just close the active window, otherwise the `ZEPHYR_BASE` will not the set
-> correctly.
+   This will make sure that the virtual environment is present in your VS Code instance.
 
 1. In the CMSIS view, click on **...** and use **Select Active Solution from workspace** to choose the project you want to work on.
 
@@ -134,3 +74,31 @@ Zephyr board name like this:
 > [!NOTE]
 > Make sure to delete the previous `/out` and `/tmp` directories before saving the updated `*.csolution.yml` file,
 > otherwise the solution might not load correctly.
+
+## If you have a Zephyr environment
+
+To use the `west` tools for projects located in different folders, set the `ZEPHYR_BASE` environment variable to the
+`./CMSIS-Zephyr/zephyrproject/zephyr` folder:
+
+### Linux
+
+```sh
+(echo; echo 'export ZEPHYR_BASE="/home/.../zephyrproject/zephyr"') >> ~/.bashrc
+source ~/.bashrc
+```
+
+### macOS
+
+```sh
+(echo; echo 'export ZEPHYR_BASE="/usr/.../zephyrproject/zephyr"') >> ~/.zshrc
+source ~/.zshrc
+```
+
+### Windows
+
+Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
+[Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).
+  
+> [!NOTE]
+> Make sure you restart VS Code. Do not just close the active window, otherwise the `ZEPHYR_BASE` will not the set
+> correctly.
