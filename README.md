@@ -13,7 +13,7 @@ and run the image on the target hardware.
 3. Follow Zephyr's
    [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide).
 
-> [!ATTENTION]
+> [!CAUTION]
 > Run the `west init` and `west update` commands without "zephyrproject"!
 
 4. From the same terminal, start VS Code:
