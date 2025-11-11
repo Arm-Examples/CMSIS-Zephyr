@@ -123,7 +123,6 @@ If you want to run the examples on a different board, simply edit the `Examples/
   packs:
     - pack: Vendor::DFP
     - pack: Vendor::BSP
-    - pack: ARM::CMSIS
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
@@ -177,4 +176,4 @@ Now, open a terminal window and continue with the fourth item in the [Quick star
 
 > [!NOTE]
 > You need to adapt the paths to the examples in the `zephyr.csolution.yml` file to the location of your Zephyr
-> installation.
+> installation (change `app-path:`).
