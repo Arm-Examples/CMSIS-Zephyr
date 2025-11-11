@@ -8,28 +8,110 @@ and run the image on the target hardware.
 
 ## Quick start
 
-1. Clone this repository onto your machine.
-2. In a terminal, change the current directory to `./CMSIS-Zephyr`.
-3. Follow Zephyr's
-   [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide).
+1. Make sure that your host OS is up-to-date.
+2. Install the following dependencies using your favorite package manager:
+    - Cmake (min. version 3.20.5)
+    - Python (min. version 3.10)
+3. Clone this repository onto your machine.
+4. In a terminal, change the current directory to `./CMSIS-Zephyr`.
+5. Install Zephyr locally (refer to [Linux and macOS](#linux-and-macos)/[Windows](#windows)).
+6. [Work with the example](#work-with-the-example)
 
-> [!CAUTION]
-> Run the `west init` and `west update` commands without "zephyrproject"!
+### Linux and macOS
 
-4. From the same terminal, start VS Code:
+- Create a new virtual environment:
 
-   ```sh
-   code .
-   ```
+  ```sh
+  python3 -m venv .venv
+  ```
+
+- Activate the virtual environment:
+
+  ```sh
+  source .venv/bin/activate
+  ```
+
+  Once activated your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by running deactivate.
+
+> [!Note]
+> Remember to activate the virtual environment every time you start working.
+
+- Install west:
+
+  ```sh
+  pip install west
+  ```
+
+- Get the Zephyr source code:
+
+  ```sh
+  west init 
+  west update
+  ```
+
+- Install Python dependencies using west packages:
+
+  ```sh
+  west packages pip --install
+  ```
+
+### Windows
+
+- Open a `cmd.exe` terminal window as a regular user.
+
+- Create a new virtual environment:
+
+  ```sh
+  cd %HOMEPATH%
+  python -m venv .venv
+  ```
+
+- Activate the virtual environment:
+
+  ```sh
+  .venv\Scripts\activate.bat
+  ```
+
+  Once activated your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by running deactivate.
+
+> [!Note]
+> Remember to activate the virtual environment every time you start working.
+
+- Install west:
+
+  ```sh
+  pip install west
+  ```
+
+- Get the Zephyr source code:
+
+  ```sh
+  west init
+  west update
+  ```
+
+- Install Python dependencies using west packages.
+
+  ```sh
+  west packages pip --install
+  ```
+
+### Work with the example
 
 > [!NOTE]
 > - Make sure that the virtual environment is still sourced.
 > - Starting VS Code from here ensures that the virtual environment is present in your VS Code instance.
 
-5. In the CMSIS view, click on **...**, use **Select Active Solution from workspace**, and choose "zephyr".
-6. Press the **Manage Solution Settings** button. In the dialog, select the target board and application.
-7. Press the **Build solution** button to build the example.
-8. Start the CMSIS Debugger.
+- From the same terminal, start VS Code:
+
+   ```sh
+   code .
+   ```
+
+- In the CMSIS view, click on **...**, use **Select Active Solution from workspace**, and choose "zephyr".
+- Press the **Manage Solution Settings** button. In the dialog, select the target board and application.
+- Press the **Build solution** button to build the example.
+- Start the CMSIS Debugger.
 
 ## Switch to a different board
 
@@ -72,21 +154,21 @@ Zephyr board name like this:
 If you have previously set up your Zephyr environment, set the `ZEPHYR_BASE` environment variable to the
 `/zephyrproject/zephyr` folder:
 
-### Linux
+**Linux**
 
 ```sh
 (echo; echo 'export ZEPHYR_BASE="/home/.../zephyrproject/zephyr"') >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### macOS
+**macOS**
 
 ```sh
 (echo; echo 'export ZEPHYR_BASE="/usr/.../zephyrproject/zephyr"') >> ~/.zshrc
 source ~/.zshrc
 ```
 
-### Windows
+**Windows**
 
 Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
 [Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).

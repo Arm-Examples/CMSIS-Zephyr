@@ -3,7 +3,6 @@ solution:
 
   # List the packs that define the device and/or board.
   packs:
-    - pack: ARM::CMSIS
     - pack: Keil::STM32L4xx_DFP
     - pack: Keil::B-L475E-IOT01A_BSP
     - pack: Keil::STM32U5xx_DFP
@@ -31,7 +30,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: threads.Debug
+            - project-context: blinky.Debug
           debugger:
             name: ST-Link@pyOCD
             port: 3333
@@ -44,6 +43,7 @@ solution:
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
+        - CONFIG_THREAD_STACK_INFO: y
         - CONFIG_DEBUG_OPTIMIZATIONS: y
     - type: Release
       west-defs:
@@ -56,3 +56,4 @@ solution:
     - west:
         app-path: ./zephyr/samples/basic/threads
   compiler: GCC
+  created-for: CMSIS-Toolbox@2.12.0
