@@ -1,1 +1,0 @@
-cmd='C:/Users/chetan01/.vcpkg/artifacts/2139c4c6/tools.kitware.cmake/3.31.5/bin/cmake.exe;-G;Ninja;-S;<SOURCE_DIR>;-B;<BINARY_DIR>;-DSOLUTION_ROOT=C:/MDK_Projects/Alif_E7_Zephyr/Blank_solution;-DCMSIS_PACK_ROOT=C:/MDK_Packs;-DCMSIS_COMPILER_ROOT=C:/Users/chetan01/.vcpkg/artifacts/2139c4c6/tools.open.cmsis.pack.cmsis.toolbox/2.7.0/etc'
