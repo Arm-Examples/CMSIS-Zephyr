@@ -7,6 +7,8 @@ solution:
     - pack: Keil::B-L475E-IOT01A_BSP
     - pack: Keil::STM32U5xx_DFP
     - pack: Keil::B-U585I-IOT02A_BSP
+    - pack: NXP::MCXN947_DFP@19.0.0
+    - pack: NXP::FRDM-MCXN947_BSP@19.0.0
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
@@ -36,6 +38,21 @@ solution:
             port: 3333
             protocol: swd
             clock: 4000000
+
+    - type: FRDM-MCXN947
+      board: NXP::FRDM-MCXN947
+      device: NXP::MCXN947VDF:cm33_core0
+      variables:
+        - west-board: frdm_mcxn947/mcxn947/cpu0
+      target-set:
+        - set:
+          images:
+            - project-context: threads.Debug
+          debugger:
+            name: CMSIS-DAP@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 10000000
 
   # List of different build configurations.
   build-types:
