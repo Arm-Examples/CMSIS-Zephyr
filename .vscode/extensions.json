@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "arm.keil-studio-pack",
+        "mcu-debug.rtos-views"
+    ]
+}

@@ -1,5 +1,5 @@
 // File: STM32U535_545_575_585_59x_5Ax.dbgconf
-// Version: 1.0.1
+// Version: 1.0.0
 // Note: refer to STM32U5 reference manual (RM0456)
 //       refer to STM32U535xx datasheet (DS14217)
 //                STM32U545xx datasheet (DS14216)
@@ -29,7 +29,7 @@ DbgMCU_CR = 0x00000006;
 //   <o.1>  DBG_TIM3_STOP            <i> TIM3 is frozen while CPU is in debug mode
 //   <o.0>  DBG_TIM2_STOP            <i> TIM2 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_APB1L_Fz = 0x0060183F;
+DbgMCU_APB1L_Fz = 0x00000000;
 
 // <h> Debug MCU APB1H freeze register (DBGMCU_APB1HFZR)
 //                                   <i> Reserved bits must be kept at reset value
@@ -40,7 +40,7 @@ DbgMCU_APB1L_Fz = 0x0060183F;
 //   <o.5>  DBG_LPTIM2_STOP          <i> LPTIM2 is frozen while CPU is in debug mode
 //   <o.1>  DBG_I2C4_STOP            <i> I2C4 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_APB1H_Fz = 0x000000E2;
+DbgMCU_APB1H_Fz = 0x00000000;
 
 // <h> Debug MCU APB2 freeze register (DBGMCU_APB2FZR)
 //                                   <i> Reserved bits must be kept at reset value
@@ -50,7 +50,7 @@ DbgMCU_APB1H_Fz = 0x000000E2;
 //   <o.13> DBG_TIM8_STOP            <i> TIM8 is frozen while CPU is in debug mode
 //   <o.11> DBG_TIM1_STOP            <i> TIM1 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_APB2_Fz = 0x00072800;
+DbgMCU_APB2_Fz = 0x00000000;
 
 // <h> Debug MCU APB3 freeze register (DBGMCU_APB3FZR)
 //                                   <i> Reserved bits must be kept at reset value
@@ -60,7 +60,7 @@ DbgMCU_APB2_Fz = 0x00072800;
 //   <o.17> DBG_LPTIM1_STOP          <i> LPTIM1 is frozen while CPU is in debug mode
 //   <o.10> DBG_I2C3_STOP            <i> I2C3 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_APB3_Fz = 0x000E0400;
+DbgMCU_APB3_Fz = 0x00000000;
 
 // <h> Debug MCU AHB1 freeze register (DBGMCU_AHB1FZR)
 //                                   <i> Reserved bits must be kept at reset value
@@ -81,7 +81,7 @@ DbgMCU_APB3_Fz = 0x000E0400;
 //   <o.1>  DBG_GPDMA1_STOP          <i> GPDMA channel 1 is frozen while CPU is in debug mode
 //   <o.0>  DBG_GPDMA0_STOP          <i> GPDMA channel 0 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_AHB1_Fz = 0x0000FFFF;
+DbgMCU_AHB1_Fz = 0x00000000;
 
 // <h> Debug MCU AHB3 freeze register (DBGMCU_AHB3FZR)
 //                                   <i> Reserved bits must be kept at reset value
@@ -90,12 +90,12 @@ DbgMCU_AHB1_Fz = 0x0000FFFF;
 //   <o.1>  DBG_LPDMA1_STOP          <i> LPDMA channel 1 is frozen while CPU is in debug mode
 //   <o.0>  DBG_LPDMA0_STOP          <i> LPDMA channel 0 is frozen while CPU is in debug mode
 // </h>
-DbgMCU_AHB3_Fz = 0x0000000F;
+DbgMCU_AHB3_Fz = 0x00000000;
 
 // <h> TPIU Pin Routing
 //   <o0> TRACECLK
 //     <i> ETM Trace Clock
-//       <0x00040002=> Pin PE2
+//       <0x0002000A=> Pin PE2
 //       <0x00000008=> Pin PA8
 //   <i> TRACECLK: Pin PE2
 //   <o1> TRACED0

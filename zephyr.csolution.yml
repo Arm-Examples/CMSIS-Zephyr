@@ -31,13 +31,13 @@ solution:
       device: STMicroelectronics::STM32U585AIIx
       target-set:
         - set:
-          images:
-            - project-context: blinky.Debug
           debugger:
             name: ST-Link@pyOCD
             port: 3333
             protocol: swd
             clock: 4000000
+          images:
+            - project-context: blinky.Debug
 
     - type: FRDM-MCXN947
       board: NXP::FRDM-MCXN947
@@ -47,7 +47,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: threads.Debug
+            - project-context: blinky.Debug
           debugger:
             name: CMSIS-DAP@pyOCD
             port: 3333
@@ -69,8 +69,8 @@ solution:
   # List related projects.
   projects:
     - west:
-        app-path: ./zephyr/samples/basic/blinky
+        app-path: ./blinky
     - west:
-        app-path: ./zephyr/samples/basic/threads
+        app-path: ./threads
   compiler: GCC
   created-for: CMSIS-Toolbox@2.12.0

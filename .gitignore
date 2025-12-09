@@ -76,7 +76,6 @@ uv2csolution.log
 .vscode/cmsis.json
 .vscode/launch.json
 .vscode/tasks.json
-.vscode/settings.json
 .cmd.jlink
 
 # legacy intermediate project file

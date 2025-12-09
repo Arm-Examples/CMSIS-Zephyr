@@ -11,13 +11,29 @@ and run the image on the target hardware.
 1. Make sure that your host OS is up-to-date.
 2. Install the following dependencies using your favorite package manager:
     - Cmake (min. version 3.20.5)
-    - Python (min. version 3.10)
+    - Python (min. version 3.10, see warning below)
 3. Clone this repository onto your machine.
-4. In a terminal, change the current directory to `./CMSIS-Zephyr`.
-5. Install Zephyr locally (refer to [Linux and macOS](#linux-and-macos)/[Windows](#windows)).
-6. [Work with the example](#work-with-the-example)
+4. Install Zephyr on your machine (refer to [Linux and macOS](#linux-and-macos)/[Windows](#windows)).
+5. [Work with the example](#work-with-the-example)
+
+> [!WARNING]
+> On Windows, do not install Python 3.14 or above as the Python package `windows-curses` is not yet available!
+
+## Zephyr installation
+
+This chapter contains installation instructions for [Linux and macOS](#linux-and-macos) and [Windows](#windows)).
+
+If you have a Zephyr environment already set up on your computer, you can skip this step. Make sure to check the
+[environment settings](#environment-settings).
 
 ### Linux and macOS
+
+- In your home directory, create a `zephyrproject` directory and change into it:
+
+  ```sh
+  mkdir zephyrproject
+  cd zephyrproject
+  ```
 
 - Create a new virtual environment:
 
@@ -31,10 +47,8 @@ and run the image on the target hardware.
   source .venv/bin/activate
   ```
 
-  Once activated your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by running deactivate.
-
-> [!Note]
-> Remember to activate the virtual environment every time you start working.
+  Once activated, your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by
+  running `deactivate`.
 
 - Install west:
 
@@ -45,7 +59,7 @@ and run the image on the target hardware.
 - Get the Zephyr source code:
 
   ```sh
-  west init 
+  west init
   west update
   ```
 
@@ -55,14 +69,22 @@ and run the image on the target hardware.
   west packages pip --install
   ```
 
+Continue with [environment settings](#environment-settings).
+
 ### Windows
 
 - Open a `cmd.exe` terminal window as a regular user.
 
+- Create a `zephyrproject` directory and change into it:
+
+  ```sh
+  mkdir zephyrproject
+  cd zephyrproject
+  ```
+
 - Create a new virtual environment:
 
   ```sh
-  cd %HOMEPATH%
   python -m venv .venv
   ```
 
@@ -72,10 +94,8 @@ and run the image on the target hardware.
   .venv\Scripts\activate.bat
   ```
 
-  Once activated your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by running deactivate.
-
-> [!Note]
-> Remember to activate the virtual environment every time you start working.
+  Once activated your shell will be prefixed with (.venv). The virtual environment can be deactivated at any time by
+  running deactivate.
 
 - Install west:
 
@@ -96,24 +116,29 @@ and run the image on the target hardware.
   west packages pip --install
   ```
 
-### Work with the example
+Continue with [environment settings](#environment-settings).
+
+### Environment settings
+
+This repository contains a `.vscode/settings.json` file with the required settings for the Python virtual environment.
+If you have followed the instructions without changing folder names, it should work out-of-the-box. If you have created
+the Zephyr environment is a different location, adapt the paths to your needs.
 
 > [!NOTE]
-> - Make sure that the virtual environment is still sourced.
-> - Starting VS Code from here ensures that the virtual environment is present in your VS Code instance.
+> On Windows, you might want to replace the `~` with `%USERPROFILE%` to make it work.
 
-- From the same terminal, start VS Code:
+## Work with the example
 
-   ```sh
-   code .
-   ```
-
-- In the CMSIS view, click on **...**, use **Select Active Solution from workspace**, and choose "zephyr".
+- Open the folder in VS Code. It should install required extensions automatically.
+- In the CMSIS view, click on **...**, use **Open Solution in Workspace**, and choose "zephyr".
 - Press the **Manage Solution Settings** button. In the dialog, select the target board and application.
 - Press the **Build solution** button to build the example.
-- Start the CMSIS Debugger.
+- Press the **Load & Debug application** button to start a debug session.
 
-## Switch to a different board
+> [!NOTE]
+> Check that the **Arm CMSIS Solution** is at least v1.64.0.
+
+### Switch to a different board
 
 If you want to run the examples on a different board, simply edit the `Examples/Blinky/blinky.csolution.yml` or
 `Examples/Threads/threads.csolution.yml` files:
@@ -147,33 +172,3 @@ Zephyr board name like this:
 > [!NOTE]
 > Make sure to delete the previous `/out` and `/tmp` directories before saving the updated `*.csolution.yml` file,
 > otherwise the solution might not load correctly.
-
-## Using an existing Zephyr environment
-
-If you have previously set up your Zephyr environment, set the `ZEPHYR_BASE` environment variable to the
-`/zephyrproject/zephyr` folder:
-
-**Linux**
-
-```sh
-(echo; echo 'export ZEPHYR_BASE="/home/.../zephyrproject/zephyr"') >> ~/.bashrc
-source ~/.bashrc
-```
-
-**macOS**
-
-```sh
-(echo; echo 'export ZEPHYR_BASE="/usr/.../zephyrproject/zephyr"') >> ~/.zshrc
-source ~/.zshrc
-```
-
-**Windows**
-
-Set `ZEPHYR_BASE` to `C:\...\Zephyr-Workspace\zephyr` in
-[Environment Variables](https://learn.microsoft.com/en-us/answers/questions/4330946/change-system-variables-on-windows-11).
-
-Now, open a terminal window and continue with the fourth item in the [Quick start](#quick-start) section.
-
-> [!NOTE]
-> You need to adapt the paths to the examples in the `zephyr.csolution.yml` file to the location of your Zephyr
-> installation (change `app-path:`).
