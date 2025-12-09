@@ -4,9 +4,6 @@
         "PATH": "$HOME/zephyrproject/.venv/bin",
         "VIRTUAL_ENV": "$HOME/zephyrproject/.venv",
     },
-    "clangd.arguments": [
-        "--compile-commands-dir=/Users/chrsei01/02_Git/Arm-Examples/CMSIS-Zephyr/out/blinky/FRDM-MCXN947/Debug"
-    ],
     "debug.hideSlowPreLaunchWarning": true,
     "debug.showInStatusBar": "never"
 }
