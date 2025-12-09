@@ -124,9 +124,6 @@ This repository contains a `.vscode/settings.json` file with the required settin
 If you have followed the instructions without changing folder names, it should work out-of-the-box. If you have created
 the Zephyr environment is a different location, adapt the paths to your needs.
 
-> [!NOTE]
-> On Windows, you might want to replace the `~` with `%USERPROFILE%` to make it work.
-
 ## Work with the example
 
 - Open the folder in VS Code. It should install required extensions automatically.
