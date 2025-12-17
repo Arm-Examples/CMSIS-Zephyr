@@ -31,13 +31,8 @@ solution:
       device: STMicroelectronics::STM32U585AIIx
       target-set:
         - set:
-          debugger:
-            name: ST-Link@pyOCD
-            port: 3333
-            protocol: swd
-            clock: 4000000
           images:
-            - project-context: blinky.Debug
+            - project-context: threads.Debug
 
     - type: FRDM-MCXN947
       board: NXP::FRDM-MCXN947
@@ -48,11 +43,6 @@ solution:
         - set:
           images:
             - project-context: blinky.Debug
-          debugger:
-            name: CMSIS-DAP@pyOCD
-            port: 3333
-            protocol: swd
-            clock: 10000000
 
   # List of different build configurations.
   build-types:
@@ -60,7 +50,7 @@ solution:
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
-        - CONFIG_THREAD_STACK_INFO: y
+        - CONFIG_THREAD_STACK_INFO: n
         - CONFIG_DEBUG_OPTIMIZATIONS: y
     - type: Release
       west-defs:
