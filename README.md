@@ -56,3 +56,7 @@ Zephyr board name like this:
 > [!NOTE]
 > Make sure to delete the previous `/out` and `/tmp` directories before saving the updated `*.csolution.yml` file,
 > otherwise the solution might not load correctly.
+
+## Introduction video
+
+![Keil Studio Zephyr capabilities Video](./video/CMSIS-Zephyr.mp4)
