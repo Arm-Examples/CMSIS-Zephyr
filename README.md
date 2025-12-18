@@ -59,4 +59,4 @@ Zephyr board name like this:
 
 ## Introduction video
 
-![Keil Studio Zephyr capabilities Video](./video/CMSIS-Zephyr.mp4)
+[![Keil Studio Zephyr capabilities Video](./video/preview.png)](./video/CMSIS-Zephyr.mp4)
