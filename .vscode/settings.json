@@ -1,0 +1,9 @@
+{
+    "cmsis-csolution.environmentVariables": {
+        "ZEPHYR_BASE": "$HOME/zephyrproject/zephyr",
+        "PATH": "$HOME/zephyrproject/.venv/bin",
+        "VIRTUAL_ENV": "$HOME/zephyrproject/.venv",
+    },
+    "debug.hideSlowPreLaunchWarning": true,
+    "debug.showInStatusBar": "never"
+}

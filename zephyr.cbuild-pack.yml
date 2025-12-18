@@ -1,0 +1,20 @@
+cbuild-pack:
+  resolved-packs:
+    - resolved-pack: Keil::B-L475E-IOT01A_BSP@2.1.0
+      selected-by-pack:
+        - Keil::B-L475E-IOT01A_BSP
+    - resolved-pack: Keil::B-U585I-IOT02A_BSP@2.0.0
+      selected-by-pack:
+        - Keil::B-U585I-IOT02A_BSP
+    - resolved-pack: Keil::STM32L4xx_DFP@3.1.0
+      selected-by-pack:
+        - Keil::STM32L4xx_DFP
+    - resolved-pack: Keil::STM32U5xx_DFP@3.0.0
+      selected-by-pack:
+        - Keil::STM32U5xx_DFP
+    - resolved-pack: NXP::FRDM-MCXN947_BSP@19.0.0
+      selected-by-pack:
+        - NXP::FRDM-MCXN947_BSP@19.0.0
+    - resolved-pack: NXP::MCXN947_DFP@19.0.0
+      selected-by-pack:
+        - NXP::MCXN947_DFP@19.0.0
