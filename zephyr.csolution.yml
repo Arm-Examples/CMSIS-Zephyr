@@ -9,6 +9,8 @@ solution:
     - pack: Keil::B-U585I-IOT02A_BSP
     - pack: NXP::MCXN947_DFP@19.0.0
     - pack: NXP::FRDM-MCXN947_BSP@19.0.0
+    - pack: Infineon::CAT1C_DFP
+    - pack: Infineon::KIT_T2G-B-H_LITE_BSP
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
@@ -39,6 +41,16 @@ solution:
       device: NXP::MCXN947VDF:cm33_core0
       variables:
         - west-board: frdm_mcxn947/mcxn947/cpu0
+      target-set:
+        - set:
+          images:
+            - project-context: blinky.Debug
+
+    - type: IFX_T2G_B_H
+      board: KIT_T2G-B-H_LITE
+      device: CYT4BF8CDS:Cortex-M0p
+      variables:
+        - west-board: kit_t2g_b_h_lite/cyt4bf8cds/m0p
       target-set:
         - set:
           images:
