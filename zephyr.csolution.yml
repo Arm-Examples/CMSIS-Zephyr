@@ -18,7 +18,7 @@ solution:
       board: STMicroelectronics::B-L475E-IOT01A
       device: STMicroelectronics::STM32L475VGTx
       variables:
-        - west-board: disco_l475_iot1
+        - west-board: disco_l475_iot1/stm32l475xx
       target-set:
         - set:
           images:
