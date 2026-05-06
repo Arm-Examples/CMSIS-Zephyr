@@ -1,6 +1,6 @@
 # CMSIS-Zephyr
 
-This repository contains an exemplary CMSIS solution file that can be used to build two Zephyr basic examples on two
+This repository contains an exemplary CMSIS solution file that can be used to build two Zephyr basic examples on multiple
 different development boards. It can be easily adapted to other boards or examples. It uses Zephyr's `west` build
 system to create the executable file for an application and the
 [Arm CMSIS Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.vscode-cmsis-debugger) to flash download
@@ -46,7 +46,7 @@ If you want to run the examples on a different board, simply extend the `zephyr.
 ```
 
 If your development board's [CMSIS board name](https://www.keil.arm.com/boards/) and
-[Zephyr board name](https://docs.zephyrproject.org/latest/boards/index.html#) do not match, you need to add the correct Zephyr board name with the variable `west-board:`. This variable may contain the `Board_Name`, or the `Board_Name/SoC_Name` or the `Board_Name/SoC_Name/Core_Name`, depending on the complexity of the board and SoC. See the Zephyr website for more details.
+[Zephyr board name](https://docs.zephyrproject.org/latest/boards/index.html#) do not match, you need to add the correct Zephyr board name with the variable `west-board:`. This variable may contain the `Board_Name`, or the `Board_Name/SoC_Name` or the `Board_Name/SoC_Name/Core_Name`, depending on the complexity of the board and SoC. See the paragraph **Supported Features** on the Zephyr board pages for more details.
 
 ```yml
   target-types:
@@ -54,7 +54,7 @@ If your development board's [CMSIS board name](https://www.keil.arm.com/boards/)
       board: STMicroelectronics::B-L475E-IOT01A
       device: STMicroelectronics::STM32L475VGTx
       variables:
-        - west-board: disco_l475_iot1
+        - west-board: disco_l475_iot1/stm32l475xx
 ```
 
 > [!NOTE]
