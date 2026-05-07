@@ -22,7 +22,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: blinky.Debug
+            - project-context: blinky.Debug-RTT
           debugger:
             name: ST-Link@pyOCD
             protocol: swd
@@ -73,13 +73,21 @@ solution:
         - CONFIG_DEBUG_THREAD_INFO: y
         - CONFIG_THREAD_STACK_INFO: n
         - CONFIG_DEBUG_OPTIMIZATIONS: y
-      # uncomment the following lines to enable RTT console and SystemView tracing
-      #  - CONFIG_USE_SEGGER_RTT: y
-      #  - CONFIG_RTT_CONSOLE: y
-      #  - CONFIG_UART_CONSOLE: n
-      #  - CONFIG_TRACING: y
-      #  - CONFIG_SEGGER_SYSTEMVIEW: y
-      #  - CONFIG_SEGGER_SYSVIEW_RTT_CHANNEL: 1
+
+    - type: Debug-RTT
+      west-defs:
+        - CONFIG_DEBUG: y
+        - CONFIG_DEBUG_THREAD_INFO: y
+        - CONFIG_THREAD_STACK_INFO: n
+        - CONFIG_DEBUG_OPTIMIZATIONS: y
+        # these options enable RTT console and SystemView
+        - CONFIG_USE_SEGGER_RTT: y
+        - CONFIG_RTT_CONSOLE: y
+        - CONFIG_UART_CONSOLE: n
+        - CONFIG_TRACING: y
+        - CONFIG_SEGGER_SYSTEMVIEW: y
+        - CONFIG_SEGGER_SYSVIEW_RTT_CHANNEL: 1
+
     - type: Release
       west-defs:
         - CONFIG_SIZE_OPTIMIZATIONS: y
