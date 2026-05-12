@@ -16,7 +16,6 @@
 
 name: Build T2G_B_H Debug CI
 on:
-
   workflow_dispatch:
   
 jobs:
