@@ -24,91 +24,91 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-    - name: Activate vcpkg
-      uses: ARM-software/cmsis-actions/vcpkg@v1
-      with:
-        config: "./vcpkg-configuration.json"
-        cache: "T2G_B_H"
+      - name: Activate vcpkg
+        uses: ARM-software/cmsis-actions/vcpkg@v1
+        with:
+          config: "./vcpkg-configuration.json"
+          cache: "T2G_B_H"
 
-    - name: Activate Arm tool license
-      uses: ARM-software/cmsis-actions/armlm@v1
+      - name: Activate Arm tool license
+        uses: ARM-software/cmsis-actions/armlm@v1
 
-    - name: Initialize CMSIS pack root folder
-      run: |
-        cpackget init https://www.keil.com/pack/index.pidx
-        cpackget update-index
+      - name: Initialize CMSIS pack root folder
+        run: |
+          cpackget init https://www.keil.com/pack/index.pidx
+          cpackget update-index
 
-    - name: Install dependencies
-      run: |
-        sudo apt install --no-install-recommends git cmake ninja-build gperf \
-        ccache dfu-util device-tree-compiler wget python3-dev python3-venv python3-tk \
-        xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+      - name: Install dependencies
+        run: |
+          sudo apt install --no-install-recommends git cmake ninja-build gperf \
+          ccache dfu-util device-tree-compiler wget python3-dev python3-venv python3-tk \
+          xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
 
-    - name: Create a Python virtual environment
-      run: |
-        echo "Create a new virtual environment in /home/runner/zephyrproject/ "
-        python -m venv /home/runner/zephyrproject/.venv
-        echo "/home/runner/zephyrproject/.venv/bin" >> $GITHUB_PATH
+      - name: Create a Python virtual environment
+        run: |
+          echo "Create a new virtual environment in /home/runner/zephyrproject/ "
+          python -m venv /home/runner/zephyrproject/.venv
+          echo "/home/runner/zephyrproject/.venv/bin" >> $GITHUB_PATH
 
-    - name: Install west
-      continue-on-error: true    
-      run: |
-        # 1. Upgrade pip
-        python -m pip install --upgrade pip
+      - name: Install west
+        continue-on-error: true    
+        run: |
+          # 1. Upgrade pip
+          python -m pip install --upgrade pip
 
-        # 2. Change to the zephyrproject directory
-        cd /home/runner/zephyrproject
+          # 2. Change to the zephyrproject directory
+          cd /home/runner/zephyrproject
 
-        # 3. Install west
-        pip install west
+          # 3. Install west
+          pip install west
 
-        # 4. Show where west gets installed
-        which west
+          # 4. Show where west gets installed
+          which west
 
-        # 5. Initialize Zephyr workspace
-        west init        
+          # 5. Initialize Zephyr workspace
+          west init
 
         # 6. Update Zephyr workspace
         west -v update
 
-    - name: Cache the Zephyrproject
-      uses: actions/cache@v5
-      with:
-        key: install-west      
-        path: /home/runner/zephyrproject
- 
-    - name: Install Zephyr Python dependencies
-      run: |
-        # 1.  Change to the zephyrproject directory
-        cd /home/runner/zephyrproject
+      - name: Cache the Zephyrproject
+        uses: actions/cache@v5
+        with:
+          key: install-west
+          path: /home/runner/zephyrproject
 
-        # 2. Activate the virtual environment
-        source ./.venv/bin/activate
-        
-        # 3. Install west packages
-        west packages pip --install
+      - name: Install Zephyr Python dependencies
+        run: |
+          # 1.  Change to the zephyrproject directory
+          cd /home/runner/zephyrproject
 
-    - name: Set Zephyr environment
-      run: |
-        echo "ZEPHYR_BASE=/home/runner/zephyrproject/zephyr" >> $GITHUB_ENV
-        echo "VIRTUAL_ENV=/home/runner/zephyrproject/.venv" >> $GITHUB_ENV
-        echo "PATH=/home/runner/zephyrproject/.venv/bin:$PATH" >> $GITHUB_ENV
+          # 2. Activate the virtual environment
+          source ./.venv/bin/activate
 
-    - name: Build IFX_T2G_B_H binary
-      run: |
-        # 1. Activate the virtual environment
-        source /home/runner/zephyrproject/.venv/bin/activate
+          # 3. Install west packages
+          west packages pip --install
 
-        # 2. Build binary
-        cbuild zephyr.csolution.yml --active IFX_T2G_B_H@CI --packs
+      - name: Set Zephyr environment
+        run: |
+          echo "ZEPHYR_BASE=/home/runner/zephyrproject/zephyr" >> $GITHUB_ENV
+          echo "VIRTUAL_ENV=/home/runner/zephyrproject/.venv" >> $GITHUB_ENV
+          echo "PATH=/home/runner/zephyrproject/.venv/bin:$PATH" >> $GITHUB_ENV
 
-    - name: Upload output T2G_B_H_Debug_CI
-      uses: actions/upload-artifact@v7
-      with:
-        name: T2G_B_H@Debug_CI
-        path: |
-          ./out/
-        include-hidden-files: true
+      - name: Build IFX_T2G_B_H binary
+        run: |
+          # 1. Activate the virtual environment
+          source /home/runner/zephyrproject/.venv/bin/activate
+
+         # 2. Build binary
+         cbuild zephyr.csolution.yml --active IFX_T2G_B_H@CI --packs
+
+      - name: Upload output T2G_B_H_Debug_CI
+        uses: actions/upload-artifact@v7
+        with:
+          name: T2G_B_H@Debug_CI
+          path: |
+            ./out/
+          include-hidden-files: true

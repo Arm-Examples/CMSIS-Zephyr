@@ -18,28 +18,28 @@ name: Run T2G_B_H Debug CI
 
 on:
   workflow_dispatch:
-  
+
 jobs:
   CI:
     runs-on: [self-hosted, rsp-p5-01]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-    - name: Download Build Artifact
-      uses: dawidd6/action-download-artifact@v21
-      with:
-        workflow: Build_IFX_T2G_B_H.yaml
-        name: T2G_B_H@Debug_CI
-        path: ./out
+      - name: Download Build Artifact
+        uses: dawidd6/action-download-artifact@v21
+        with:
+          workflow: Build_IFX_T2G_B_H.yaml
+          name: T2G_B_H@Debug_CI
+          path: ./out
 
-    - name: Flash the application
-      working-directory: ./out
-      run: | 
-         pyocd load --uid 171C089E02272400 --cbuild-run zephyr+IFX_T2G_B_H.cbuild-run.yml
+      - name: Flash the application
+        working-directory: ./out
+        run: |
+           pyocd load --uid 171C089E02272400 --cbuild-run zephyr+IFX_T2G_B_H.cbuild-run.yml
 
-    - name: Execute the application
-      working-directory: ./out
-      run: | 
-         pyocd run --uid 171C089E02272400 --cbuild-run zephyr+IFX_T2G_B_H.cbuild-run.yml
+      - name: Execute the application
+        working-directory: ./out
+        run: |
+           pyocd run --uid 171C089E02272400 --cbuild-run zephyr+IFX_T2G_B_H.cbuild-run.yml
