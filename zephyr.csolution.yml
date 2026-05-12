@@ -65,6 +65,15 @@ solution:
           images:
             - project-context: blinky.Debug
 
+        - set: CI
+          images:
+            - project-context: blinky.Debug
+          debugger:
+            name: KitProg3@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 10000000
+
   # List of different build configurations.
   build-types:
     - type: Debug
