@@ -71,8 +71,8 @@ jobs:
           # 5. Initialize Zephyr workspace
           west init
 
-        # 6. Update Zephyr workspace
-        west -v update
+          # 6. Update Zephyr workspace
+          west -v update
 
       - name: Cache the Zephyrproject
         uses: actions/cache@v5
@@ -102,8 +102,8 @@ jobs:
           # 1. Activate the virtual environment
           source /home/runner/zephyrproject/.venv/bin/activate
 
-         # 2. Build binary
-         cbuild zephyr.csolution.yml --active IFX_T2G_B_H@CI --packs
+          # 2. Build binary
+          cbuild zephyr.csolution.yml --active IFX_T2G_B_H@CI --packs
 
       - name: Upload output T2G_B_H_Debug_CI
         uses: actions/upload-artifact@v7
