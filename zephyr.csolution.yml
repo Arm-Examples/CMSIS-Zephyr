@@ -11,6 +11,8 @@ solution:
     - pack: Keil::STM32H7B3I-DK_BSP
     - pack: Infineon::CAT1C_DFP
     - pack: Infineon::KIT_T2G-B-H_LITE_BSP
+    - pack: Keil::STM32H5xx_DFP
+    - pack: Keil::NUCLEO-H563ZI_BSP
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
@@ -64,7 +66,49 @@ solution:
         - set:
           images:
             - project-context: blinky.Debug
-
+        - set: CI
+          images:
+            - project-context: blinky.Debug
+          debugger:
+            name: KitProg3@pyOCD
+            port: 3333
+            protocol: swd
+            clock: 10000000
+    - type: NUCLEO-H563ZI
+      board: STMicroelectronics::NUCLEO-H563ZI
+      device: STMicroelectronics::STM32H563ZITx
+      variables:
+        - west-board: nucleo_h563zi/stm32h563xx
+      target-set:
+        - set:
+          images:
+            - project-context: blinky.Debug
+          debugger:
+            name: ST-Link@pyOCD
+            clock: 4000000
+            protocol: swd
+        - set: CI
+          debugger:
+            name: ST-Link@pyOCD
+            clock: 10000000
+            protocol: swd
+          images:
+            - project-context: blinky.Debug
+        - set: HIL
+          debugger:
+            name: ST-Link@pyOCD
+            clock: 10000000
+            protocol: swd
+            rtt:
+              - channel:
+                  - number: 0
+                    mode: stdio
+                  - number: 1
+                    mode: systemview
+            telnet:
+              - mode: console
+          images:
+            - project-context: blinky.Debug-RTT
   # List of different build configurations.
   build-types:
     - type: Debug
