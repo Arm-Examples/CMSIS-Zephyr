@@ -19,14 +19,106 @@ CMSIS-Toolbox uses the same common project information in VS Code, command-line,
 ## VS Code quick start
 
 1. Install [Keil Studio for VS Code](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) from the VS Code marketplace.
-2. Follow the [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) and install Zephyr in the directory `$HOME/zephyrproject`.
+2. [Install upstream Zephyr](#zephyr-installation) and [configure its environment variables](#configure-vs-code).
 3. Clone this repository (for example using [Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)) or download the ZIP file. Then open the repository folder in VS Code.
 4. In VS Code, open the [CMSIS View](https://mdk-packs.github.io/vscode-cmsis-solution-docs/userinterface.html#2-main-area-of-the-cmsis-view) and then the [Manage Solution dialog](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#manage-solution-view) to select the target board and one project.
 5. In the CMSIS view, use the [Action buttons](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#action-buttons) to build, load, and debug the example on your hardware.
 
+> [!TIP]
+> If configuration or build errors occur, use **Clean All 'out' and 'tmp' directories** from the CMSIS View menu to remove stale CMake cache files before rebuilding.
+
+## Zephyr installation
+
+The following instructions apply to Linux, macOS, and Windows. Install a supported version of Python 3 and Git before
+continuing.
+
+> [!WARNING]
+> On Windows, use Python 3.13 or earlier because the `windows-curses` package is not yet available for Python 3.14.
+
+### Create the workspace
+
+- Open a terminal as a regular user. On Windows, use `cmd.exe` for the commands below.
+
+- In any suitable working directory, create a `zephyrproject` directory and change into it:
+
+  ```console
+  mkdir zephyrproject
+  cd zephyrproject
+  ```
+
+- Create a virtual environment. Use the command for your operating system:
+
+  Linux and macOS:
+
+  ```sh
+  python3 -m venv .venv
+  ```
+
+  Windows:
+
+  ```bat
+  python -m venv .venv
+  ```
+
+- Activate the virtual environment.
+
+  Linux and macOS:
+
+  ```sh
+  source .venv/bin/activate
+  ```
+
+  Windows (`cmd.exe`):
+
+  ```bat
+  .venv\Scripts\activate.bat
+  ```
+
+  Once activated, the shell prompt is prefixed with `(.venv)`. Activate the environment again whenever you open a
+  new terminal. Run `deactivate` to leave it.
+
+- Install west. After activation, `python` refers to the virtual environment on every supported operating system:
+
+  ```console
+  python -m pip install west
+  ```
+
+- Get the upstream Zephyr source code and its modules:
+
+  ```console
+  west init -m https://github.com/zephyrproject-rtos/zephyr.git
+  west update
+  ```
+
+- Install the Python dependencies required by Zephyr:
+
+  ```console
+  python -m pip install -r zephyr/scripts/requirements.txt
+  ```
+
+### Configure VS Code
+
+The CMSIS Solution extension needs the Zephyr workspace and virtual environment paths when it runs `west`.
+
+1. In VS Code, open **Settings** and search for **Cmsis-Csolution: Environment Variables**.
+2. Select the **User** or **Workspace** setting and choose **Add Item** for each variable below. Replace the example
+   prefix with the absolute path to your `zephyrproject` directory.
+
+   | Variable | Linux and macOS | Windows |
+   |---|---|---|
+   | `ZEPHYR_BASE` | `/work/zephyrproject/zephyr` | `C:\work\zephyrproject\zephyr` |
+   | `PATH` | `/work/zephyrproject/.venv/bin` | `C:\work\zephyrproject\.venv\Scripts` |
+   | `VIRTUAL_ENV` | `/work/zephyrproject/.venv` | `C:\work\zephyrproject\.venv` |
+
+3. Fully restart VS Code so that the extension uses the new environment.
+
+For more information, see [Work with Zephyr applications](https://mdk-packs.github.io/vscode-cmsis-solution-docs/zephyr.html#set-environment-variables).
+
 ## Command-line build
 
-Install [CMSIS-Toolbox](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/), the required compiler, and a [Zephyr workspace](https://docs.zephyrproject.org/latest/develop/getting_started/index.html). Ensure that the Zephyr environment is active, then run for example:
+Install [CMSIS-Toolbox](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/), the required compiler, and the
+[Zephyr workspace described above](#zephyr-installation). Ensure that the Zephyr virtual environment is active, then
+run for example:
 
 ```bash
 cbuild zephyr.csolution.yml --packs --active NUCLEO-H563ZI
@@ -36,9 +128,7 @@ The command uses the same common project information as VS Code and invokes West
 
 > [!CAUTION]
 > If you see errors during `west build` (for example during `generating a build system`), the `west` installation or `PATH` is likely incorrect. Check [Settings](https://code.visualstudio.com/docs/configure/settings) - **Cmsis-Csolution:** Environment Variables.
->
-> - For Windows, set `PATH` to `$HOME/zephyrproject/.venv/scripts`
-> - For Mac/Linux, set `PATH` to `$HOME/zephyrproject/.venv/bin`
+> Verify that the values match the paths in [Configure VS Code](#configure-vs-code).
 <!-- -->
 > [!TIP]
 > For more information, see the [Keil Studio documentation - Work with Zephyr applications](https://mdk-packs.github.io/vscode-cmsis-solution-docs/zephyr.html).
