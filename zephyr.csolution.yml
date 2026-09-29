@@ -115,14 +115,14 @@ solution:
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
-        - CONFIG_THREAD_STACK_INFO: n
+        - CONFIG_THREAD_STACK_INFO: y
         - CONFIG_DEBUG_OPTIMIZATIONS: y
 
     - type: Debug-RTT
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
-        - CONFIG_THREAD_STACK_INFO: n
+        - CONFIG_THREAD_STACK_INFO: y
         - CONFIG_DEBUG_OPTIMIZATIONS: y
         # these options enable RTT console and SystemView
         - CONFIG_USE_SEGGER_RTT: y
