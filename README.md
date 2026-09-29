@@ -2,7 +2,7 @@
 
 [<img src="./images/preview.png" alt="Overview of Zephyr capabilities in Keil Studio" width="330" height="205" align="left">](https://armkeil.blob.core.windows.net/developer/Files/videos/KeilStudio/CMSIS-Zephyr.mp4 "Overview of Zephyr capabilities in Keil Studio")
 
-This repository contains two basic Zephyr examples configured in the [`zephyr.csolution.yml`](./zephyr.csolution.yml) file for multiple development boards. It uses [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) and the Zephyr `west` build system to generate the application image.
+This repository contains two basic Zephyr examples configured for multiple development boards. Separate CMSIS solutions are provided for [GCC](./zephyr-gcc.csolution.yml) and [Arm Compiler 6](./zephyr-ac6.csolution.yml). It uses [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) and the Zephyr `west` build system to generate the application image.
 
 The [Arm CMSIS Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.vscode-cmsis-debugger) provides kernel-aware debugging and views for device peripherals, including the interrupt system. It is used to download and run the application on target hardware.
 
@@ -12,7 +12,7 @@ Overall, Zephyr development is simplified by managing different build configurat
 
 ## CMSIS-Toolbox Integration
 
-Zephyr and West remain responsible for configuring and building the Zephyr application. The [`zephyr.csolution.yml`](./zephyr.csolution.yml) file adds [common project information](https://open-cmsis-pack.github.io/cmsis-toolbox/overview/#common-project-information-for-the-development-workflow) for the selectable application configurations and their target hardware.
+Zephyr and West remain responsible for configuring and building the Zephyr application. The [`zephyr-gcc.csolution.yml`](./zephyr-gcc.csolution.yml) and [`zephyr-ac6.csolution.yml`](./zephyr-ac6.csolution.yml) files add [common project information](https://open-cmsis-pack.github.io/cmsis-toolbox/overview/#common-project-information-for-the-development-workflow) for the selectable application configurations and their target hardware.
 
 CMSIS-Toolbox uses the same common project information in VS Code, command-line, and CI/DevOps workflows. CMSIS Packs provide device and board data that complements the Zephyr build information with programming, run, and debug configuration, peripheral views, and trace configuration. Generated files such as `compile_commands.json` and `*.cbuild-run.yml` connect smart editor features, static code analysis and test tools, target deployment, and trace to the application development workflow without replacing Zephyr or West.
 
@@ -21,7 +21,7 @@ CMSIS-Toolbox uses the same common project information in VS Code, command-line,
 1. Install [Keil Studio for VS Code](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) from the VS Code marketplace.
 2. [Install upstream Zephyr](#zephyr-installation) and [configure its environment variables](#configure-vs-code).
 3. Clone this repository (for example using [Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)) or download the ZIP file. Then open the repository folder in VS Code.
-4. In VS Code, open the [CMSIS View](https://mdk-packs.github.io/vscode-cmsis-solution-docs/userinterface.html#2-main-area-of-the-cmsis-view) and then the [Manage Solution dialog](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#manage-solution-view) to select the target board and one project.
+4. In VS Code, open the [CMSIS View](https://mdk-packs.github.io/vscode-cmsis-solution-docs/userinterface.html#2-main-area-of-the-cmsis-view), select **Open Solution in Workspace**, and open `zephyr-gcc.csolution.yml` or `zephyr-ac6.csolution.yml`. Then use the [Manage Solution dialog](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#manage-solution-view) to select the target board and one project.
 5. In the CMSIS view, use the [Action buttons](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#action-buttons) to build, load, and debug the example on your hardware.
 
 > [!TIP]
@@ -114,14 +114,29 @@ The CMSIS Solution extension needs the Zephyr workspace and virtual environment 
 
 For more information, see [Work with Zephyr applications](https://mdk-packs.github.io/vscode-cmsis-solution-docs/zephyr.html#set-environment-variables).
 
+### Compiler and C library selection
+
+Each compiler has a dedicated CMSIS solution that selects the C library supplied with its toolchain:
+
+| Solution | Compiler | C library |
+|---|---|---|
+| `zephyr-gcc.csolution.yml` | GCC | Full Newlib |
+| `zephyr-ac6.csolution.yml` | Arm Compiler 6 | Arm Compiler C library |
+
+The compiler-specific settings are passed to Zephyr by `west build`, while the application `prj.conf` files remain compiler-independent.
+
 ## Command-line build
 
 Install [CMSIS-Toolbox](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/), the required compiler, and the
 [Zephyr workspace described above](#zephyr-installation). Ensure that the Zephyr virtual environment is active, then
-run for example:
+run one of the following commands:
 
 ```bash
-cbuild zephyr.csolution.yml --packs --active NUCLEO-H563ZI
+# GCC
+cbuild zephyr-gcc.csolution.yml --packs --active NUCLEO-H563ZI
+
+# Arm Compiler 6
+cbuild zephyr-ac6.csolution.yml --packs --active NUCLEO-H563ZI
 ```
 
 The command uses the same common project information as VS Code and invokes West to build the selected Zephyr application. Refer to [West Build System Integration](https://open-cmsis-pack.github.io/cmsis-toolbox/build-overview/#west-build-system-integration) for details.
@@ -135,7 +150,7 @@ The command uses the same common project information as VS Code and invokes West
 
 ## Add another board
 
-If you use a different board, extend the [`zephyr.csolution.yml`](zephyr.csolution.yml) file with:
+If you use a different board, extend both [`zephyr-gcc.csolution.yml`](zephyr-gcc.csolution.yml) and [`zephyr-ac6.csolution.yml`](zephyr-ac6.csolution.yml) with:
 
 ```yml
   # List the packs that define the device and/or board.
@@ -193,25 +208,26 @@ west build -t ram_report
 
 SEGGER Real-Time Transfer (RTT) enables real-time data exchange between a target device and a host debugger without requiring an additional UART interface. RTT is also the transport mechanism used for SystemView.
 
-RTT and SystemView are integrated in Zephyr and enabled in the [`zephyr.csolution.yml`](zephyr.csolution.yml) file with the `west-defs` under the `build-type: Debug-RTT`. RTT and SystemView are currently used for CI testing and can be used with pyOCD as shown below.
+RTT and SystemView are integrated in Zephyr and enabled in both CMSIS solution files with the `west-defs` under the `build-type: Debug-RTT`. RTT and SystemView are currently used for CI testing and can be used with pyOCD as shown below.
 
 **Example invocation for `target-type: STM32H7B3I-DK`:**
 
 ```bash
-pyocd load --cbuild-run <path>\out\zephyr+STM32H7B3I-DK.cbuild-run.yml
-pyocd run  --cbuild-run <path>\out\zephyr+STM32H7B3I-DK.cbuild-run.yml
+pyocd load --cbuild-run <path>\out\zephyr-gcc+STM32H7B3I-DK.cbuild-run.yml
+pyocd run  --cbuild-run <path>\out\zephyr-gcc+STM32H7B3I-DK.cbuild-run.yml
 ```
 
-The pyOCD `run` command now outputs test messages to the debug console and collects the file `out\zephyr+STM32H7B3I-DK.SVdat`, which can be analyzed with [SEGGER SystemView](https://www.segger.com/products/development-tools/systemview/).
+The pyOCD `run` command now outputs test messages to the debug console and collects the file `out\zephyr-gcc+STM32H7B3I-DK.SVdat`, which can be analyzed with [SEGGER SystemView](https://www.segger.com/products/development-tools/systemview/). Use the corresponding `zephyr-ac6` filename for an Arm Compiler 6 build.
 
 ## CI Test Automation
 
 This repository demonstrates a hybrid CI approach: build steps run on GitHub-hosted runners, while hardware execution runs on a self-hosted Raspberry Pi 5 (RPi5) runner connected to a NUCLEO board.
 
-The [CI workflow](./.github/workflows) is split into two parts:
+The [CI workflows](./.github/workflows) cover both GCC and Arm Compiler 6:
 
-- [Build_NUCLEO-H563ZI.yaml](./.github/workflows/Build_NUCLEO-H563ZI.yaml) compiles the selected Zephyr application and produces build outputs that can be consumed by the run workflow.
-- [Run_NUCLEO-H563ZI.yaml](./.github/workflows/Run_NUCLEO-H563ZI.yaml) executes on the self-hosted RPi5 runner and uses an attached debug probe to download and execute the image on the target board.
+- [Build_All_Variants.yaml](./.github/workflows/Build_All_Variants.yaml) builds every supported project, build type, target, and compiler combination.
+- [Build_NUCLEO-H563ZI.yaml](./.github/workflows/Build_NUCLEO-H563ZI.yaml) creates GCC and AC6 HIL binaries and produces compiler-specific artifacts for the run workflow.
+- [Run_NUCLEO-H563ZI.yaml](./.github/workflows/Run_NUCLEO-H563ZI.yaml) executes both HIL binaries on the self-hosted RPi5 runner and uses an attached debug probe to download and execute each image on the target board.
 
 The run workflow uses pyOCD to flash and run the application. To avoid duplicating board configuration in multiple places, the workflow relies on the generated `*.cbuild-run.yml` file for target information and uses the ID of the connected debug adapter to select the correct probe. Refer to the [CMSIS-Toolbox - Run and Debug Configuration](https://open-cmsis-pack.github.io/cmsis-toolbox/build-overview/#run-and-debug-configuration) for more information.
 

@@ -140,7 +140,13 @@ solution:
   projects:
     - west:
         app-path: ./blinky
+        west-defs:
+          - CONFIG_NEWLIB_LIBC: y
+          - CONFIG_NEWLIB_LIBC_NANO: n
     - west:
         app-path: ./threads
+        west-defs:
+          - CONFIG_NEWLIB_LIBC: y
+          - CONFIG_NEWLIB_LIBC_NANO: n
   compiler: GCC
   created-for: CMSIS-Toolbox@2.12.0

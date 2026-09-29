@@ -22,7 +22,16 @@ on:
   
 jobs:
   CI:
+    name: Build HIL / ${{ matrix.solution.compiler }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        solution:
+          - file: zephyr-gcc.csolution.yml
+            compiler: GCC
+          - file: zephyr-ac6.csolution.yml
+            compiler: AC6
 
     steps:
       - name: Checkout repository
@@ -35,6 +44,7 @@ jobs:
           cache: "NUCLEO-H563ZI"
 
       - name: Activate Arm tool license
+        if: matrix.solution.compiler == 'AC6'
         uses: ARM-software/cmsis-actions/armlm@v1
 
       - name: Initialize CMSIS pack root folder
@@ -105,12 +115,12 @@ jobs:
           source /home/runner/zephyrproject/.venv/bin/activate
 
           # 2. Build binary
-          cbuild zephyr.csolution.yml --active NUCLEO-H563ZI@HIL --packs
+          cbuild ${{ matrix.solution.file }} --active NUCLEO-H563ZI@HIL --packs
 
       - name: Upload output NUCLEO-H563ZI_Debug_HIL
         uses: actions/upload-artifact@v7
         with:
-          name: NUCLEO-H563ZI@Debug_HIL
+          name: NUCLEO-H563ZI@Debug_HIL-${{ matrix.solution.compiler }}
           path: |
             ./out/
           include-hidden-files: true
