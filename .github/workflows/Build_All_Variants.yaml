@@ -74,15 +74,6 @@ jobs:
         if: matrix.solution.compiler == 'AC6'
         uses: ARM-software/cmsis-actions/armlm@v1
 
-      # Zephyr 4.4 always selects the Infineon CAT1 GCC assembly source. The
-      # HAL also provides an ArmClang source; use it until this is fixed
-      # upstream.
-      - name: Apply Infineon ArmClang workaround
-        if: matrix.solution.compiler == 'AC6'
-        run: >-
-          git -C zephyrproject/zephyr apply
-          "${{ github.workspace }}/.github/patches/zephyr-4.4-infineon-armclang.patch"
-
       - name: Build
         env:
           ZEPHYR_BASE: ${{ github.workspace }}/zephyrproject/zephyr

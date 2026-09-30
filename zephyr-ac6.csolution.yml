@@ -19,6 +19,12 @@ solution:
     - type: B-L475-IOT01A
       board: STMicroelectronics::B-L475E-IOT01A
       device: STMicroelectronics::STM32L475VGTx
+      west-defs: &ac6-stm32-defs
+        - CONFIG_ENTROPY_GENERATOR: y
+        - CONFIG_USE_STM32_HAL_CORTEX: y
+        - CONFIG_USE_STM32_HAL_GPIO: y
+        - CONFIG_USE_STM32_HAL_PWR: y
+        - CONFIG_USE_STM32_HAL_PWR_EX: y
       variables:
         - west-board: disco_l475_iot1/stm32l475xx
       target-set:
@@ -32,6 +38,7 @@ solution:
     - type: B-U585I-IOT02A
       board: STMicroelectronics::B-U585I-IOT02A
       device: STMicroelectronics::STM32U585AIIx
+      west-defs: *ac6-stm32-defs
       target-set:
         - set:
           images:
@@ -39,6 +46,7 @@ solution:
     - type: STM32H7B3I-DK
       board: STMicroelectronics::STM32H7B3I-DK
       device: STMicroelectronics::STM32H7B3LIHxQ
+      west-defs: *ac6-stm32-defs
       variables:
         - west-board: stm32h7b3i_dk/stm32h7b3xx
       target-set:
@@ -77,6 +85,7 @@ solution:
     - type: NUCLEO-H563ZI
       board: STMicroelectronics::NUCLEO-H563ZI
       device: STMicroelectronics::STM32H563ZITx
+      west-defs: *ac6-stm32-defs
       variables:
         - west-board: nucleo_h563zi/stm32h563xx
       target-set:
