@@ -200,6 +200,8 @@ SEGGER Real-Time Transfer (RTT) enables real-time data exchange between a target
 
 RTT and SystemView are integrated in Zephyr and enabled in the [`zephyr.csolution.yml`](zephyr.csolution.yml) file with the `west-defs` under the `build-type: Debug-RTT`. RTT and SystemView are currently used for CI testing and can be used with pyOCD as shown below.
 
+The `Debug-RTT` configurations for `target-type: IFX_T2G_B_H` are excluded from the CI build matrix because RTT support is not available for this Zephyr target.
+
 **Example invocation for `target-type: STM32H7B3I-DK`:**
 
 ```bash

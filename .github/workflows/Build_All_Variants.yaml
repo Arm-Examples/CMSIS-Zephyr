@@ -8,6 +8,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "0 3 1 * *" # Runs at 03:00 UTC on day 1 of every month
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,6 +38,9 @@ jobs:
           - STM32H7B3I-DK
           - IFX_T2G_B_H
           - NUCLEO-H563ZI
+        exclude:
+          - build-type: Debug-RTT
+            target: IFX_T2G_B_H
 
     steps:
       - name: Check out repository
@@ -68,11 +73,3 @@ jobs:
           cbuild zephyr.csolution.yml
           --packs
           --context "${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }}"
-
-      - name: Upload build artifacts
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ matrix.project }}-${{ matrix.build-type }}-${{ matrix.target }}
-          path: out
-          include-hidden-files: true
