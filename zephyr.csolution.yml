@@ -29,6 +29,7 @@ solution:
             name: ST-Link@pyOCD
             protocol: swd
             clock: 4000000
+            
     - type: B-U585I-IOT02A
       board: STMicroelectronics::B-U585I-IOT02A
       device: STMicroelectronics::STM32U585AIIx
@@ -36,6 +37,7 @@ solution:
         - set:
           images:
             - project-context: threads.Debug
+
     - type: STM32H7B3I-DK
       board: STMicroelectronics::STM32H7B3I-DK
       device: STMicroelectronics::STM32H7B3LIHxQ
@@ -57,6 +59,7 @@ solution:
               - mode: console
           images:
             - project-context: blinky.Debug
+
     - type: IFX_T2G_B_H
       board: KIT_T2G-B-H_LITE
       device: CYT4BF8CDS:Cortex-M0p
@@ -74,6 +77,7 @@ solution:
             port: 3333
             protocol: swd
             clock: 10000000
+
     - type: NUCLEO-H563ZI
       board: STMicroelectronics::NUCLEO-H563ZI
       device: STMicroelectronics::STM32H563ZITx
@@ -109,20 +113,21 @@ solution:
               - mode: console
           images:
             - project-context: blinky.Debug-RTT
+
   # List of different build configurations.
   build-types:
     - type: Debug
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
-        - CONFIG_THREAD_STACK_INFO: n
+        - CONFIG_THREAD_STACK_INFO: y
         - CONFIG_DEBUG_OPTIMIZATIONS: y
 
     - type: Debug-RTT
       west-defs:
         - CONFIG_DEBUG: y
         - CONFIG_DEBUG_THREAD_INFO: y
-        - CONFIG_THREAD_STACK_INFO: n
+        - CONFIG_THREAD_STACK_INFO: y
         - CONFIG_DEBUG_OPTIMIZATIONS: y
         # these options enable RTT console and SystemView
         - CONFIG_USE_SEGGER_RTT: y

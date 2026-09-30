@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: Copyright 2022-2026 Arm Limited and/or its
+# affiliates <open-source-office@arm.com>
+# SPDX-License-Identifier: Apache-2.0
+
+name: Build all variants
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 1 * *" # Runs at 03:00 UTC on day 1 of every month
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - blinky
+          - threads
+        build-type:
+          - Debug
+          - Debug-RTT
+          - Release
+        target:
+          - B-L475-IOT01A
+          - B-U585I-IOT02A
+          - STM32H7B3I-DK
+          - IFX_T2G_B_H
+          - NUCLEO-H563ZI
+        exclude:
+          - build-type: Debug-RTT
+            target: IFX_T2G_B_H
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Set up CMSIS build tools
+        uses: ARM-software/cmsis-actions/vcpkg@v1
+        with:
+          config: ./vcpkg-configuration.json
+          cache: cmsis-tools-${{ runner.os }}-${{ hashFiles('vcpkg-configuration.json') }}
+
+      - name: Set up Zephyr
+        shell: bash
+        run: |
+          python -m pip install west
+          west init -m https://github.com/zephyrproject-rtos/zephyr.git --mr v4.4.0 zephyrproject
+          cd zephyrproject
+          west update
+          python -m pip install -r zephyr/scripts/requirements.txt
+
+      - name: Build
+        env:
+          ZEPHYR_BASE: ${{ github.workspace }}/zephyrproject/zephyr
+        run: >-
+          cbuild zephyr.csolution.yml
+          --packs
+          --context "${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }}"

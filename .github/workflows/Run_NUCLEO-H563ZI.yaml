@@ -54,4 +54,5 @@ jobs:
           name: NUCLEO-H563ZI_SVDat@Debug_HIL
           path: |
             ./out/zephyr+NUCLEO-H563ZI.SVDat
+          retention-days: 1
 

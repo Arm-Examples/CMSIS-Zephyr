@@ -114,3 +114,4 @@ jobs:
           path: |
             ./out/
           include-hidden-files: true
+          retention-days: 1
