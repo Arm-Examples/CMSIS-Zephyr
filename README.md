@@ -1,8 +1,13 @@
+[![License](https://img.shields.io/github/license/Arm-Examples/CMSIS-Zephyr?label)](https://github.com/Arm-Examples/CMSIS-Zephyr/blob/main/LICENSE)
+[![Build all variants](https://img.shields.io/github/actions/workflow/status/Arm-Examples/CMSIS-Zephyr/Build_All_Variants.yaml?logo=arm&logoColor=0091bd&label=Build%20all%20variants)](https://github.com/Arm-Examples/CMSIS-Zephyr/actions/workflows/Build_All_Variants.yaml)
+[![HIL build](https://img.shields.io/github/actions/workflow/status/Arm-Examples/CMSIS-Zephyr/Build_NUCLEO-H563ZI.yaml?logo=arm&logoColor=0091bd&label=HIL%20build)](https://github.com/Arm-Examples/CMSIS-Zephyr/actions/workflows/Build_NUCLEO-H563ZI.yaml)
+[![HIL run](https://img.shields.io/github/actions/workflow/status/Arm-Examples/CMSIS-Zephyr/Run_NUCLEO-H563ZI.yaml?logo=arm&logoColor=0091bd&label=HIL%20run)](https://github.com/Arm-Examples/CMSIS-Zephyr/actions/workflows/Run_NUCLEO-H563ZI.yaml)
+
 # Zephyr Integration with CMSIS-Toolbox
 
 [<img src="./images/preview.png" alt="Overview of Zephyr capabilities in Keil Studio" width="330" height="205" align="left">](https://armkeil.blob.core.windows.net/developer/Files/videos/KeilStudio/CMSIS-Zephyr.mp4 "Overview of Zephyr capabilities in Keil Studio")
 
-This repository contains two basic Zephyr examples configured in the [`zephyr.csolution.yml`](./zephyr.csolution.yml) file for multiple development boards. It uses [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) and the Zephyr `west` build system to generate the application image.
+This repository contains two basic Zephyr examples configured in the [`zephyr.csolution.yml`](./zephyr.csolution.yml) file for multiple development boards. It uses the GCC toolchain, [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), and the Zephyr `west` build system to generate the application image.
 
 The [Arm CMSIS Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.vscode-cmsis-debugger) provides kernel-aware debugging and views for device peripherals, including the interrupt system. It is used to download and run the application on target hardware.
 
@@ -116,7 +121,7 @@ For more information, see [Work with Zephyr applications](https://mdk-packs.gith
 
 ## Command-line build
 
-Install [CMSIS-Toolbox](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/), the required compiler, and the
+Install [CMSIS-Toolbox](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/), the GCC compiler, and the
 [Zephyr workspace described above](#zephyr-installation). Ensure that the Zephyr virtual environment is active, then
 run for example:
 
@@ -208,8 +213,9 @@ The pyOCD `run` command now outputs test messages to the debug console and colle
 
 This repository demonstrates a hybrid CI approach: build steps run on GitHub-hosted runners, while hardware execution runs on a self-hosted Raspberry Pi 5 (RPi5) runner connected to a NUCLEO board.
 
-The [CI workflow](./.github/workflows) is split into two parts:
+The [CI workflows](./.github/workflows) provide full build coverage and hardware-in-the-loop (HIL) testing:
 
+- [Build_All_Variants.yaml](./.github/workflows/Build_All_Variants.yaml) builds every project, build type, and supported target combination.
 - [Build_NUCLEO-H563ZI.yaml](./.github/workflows/Build_NUCLEO-H563ZI.yaml) compiles the selected Zephyr application and produces build outputs that can be consumed by the run workflow.
 - [Run_NUCLEO-H563ZI.yaml](./.github/workflows/Run_NUCLEO-H563ZI.yaml) executes on the self-hosted RPi5 runner and uses an attached debug probe to download and execute the image on the target board.
 
