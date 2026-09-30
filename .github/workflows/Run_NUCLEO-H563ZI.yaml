@@ -24,17 +24,8 @@ on:
 
 jobs:
   CI:
-    name: Run HIL / ${{ matrix.solution.compiler }}
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push') }}
     runs-on: [self-hosted, rsp-p5-01]
-    strategy:
-      fail-fast: false
-      matrix:
-        solution:
-          - stem: zephyr-gcc
-            compiler: GCC
-          - stem: zephyr-ac6
-            compiler: AC6
 
     steps:
       - name: Checkout repository
@@ -44,23 +35,23 @@ jobs:
         uses: dawidd6/action-download-artifact@v21
         with:
           workflow: Build_NUCLEO-H563ZI.yaml
-          name: NUCLEO-H563ZI@Debug_HIL-${{ matrix.solution.compiler }}
+          name: NUCLEO-H563ZI@Debug_HIL
           path: ./out
 
       - name: Flash the application
         working-directory: ./out
         run: |
-          pyocd load --uid 001700054142501320353451 --cbuild-run ${{ matrix.solution.stem }}+NUCLEO-H563ZI.cbuild-run.yml -O smart_flash=false
+          pyocd load --uid 001700054142501320353451 --cbuild-run zephyr+NUCLEO-H563ZI.cbuild-run.yml -O smart_flash=false
 
       - name: Execute the application
         working-directory: ./out
         run: |
-          pyocd run --uid 001700054142501320353451 --cbuild-run ${{ matrix.solution.stem }}+NUCLEO-H563ZI.cbuild-run.yml -O reset_type=hardware --timelimit 10
+          pyocd run --uid 001700054142501320353451 --cbuild-run zephyr+NUCLEO-H563ZI.cbuild-run.yml -O reset_type=hardware --timelimit 10
 
       - name: Upload SystemView file
         uses: actions/upload-artifact@v7
         with:
-          name: NUCLEO-H563ZI_SVDat@Debug_HIL-${{ matrix.solution.compiler }}
+          name: NUCLEO-H563ZI_SVDat@Debug_HIL
           path: |
-            ./out/${{ matrix.solution.stem }}+NUCLEO-H563ZI.SVDat
+            ./out/zephyr+NUCLEO-H563ZI.SVDat
 

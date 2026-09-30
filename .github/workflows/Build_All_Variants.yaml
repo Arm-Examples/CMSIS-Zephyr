@@ -18,16 +18,11 @@ permissions:
 
 jobs:
   build:
-    name: ${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }} / ${{ matrix.solution.compiler }}
+    name: ${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        solution:
-          - file: zephyr-gcc.csolution.yml
-            compiler: GCC
-          - file: zephyr-ac6.csolution.yml
-            compiler: AC6
         project:
           - blinky
           - threads
@@ -41,10 +36,6 @@ jobs:
           - STM32H7B3I-DK
           - IFX_T2G_B_H
           - NUCLEO-H563ZI
-        exclude:
-          # Zephyr 4.4 does not enable SEGGER RTT for this board.
-          - build-type: Debug-RTT
-            target: IFX_T2G_B_H
 
     steps:
       - name: Check out repository
@@ -70,15 +61,11 @@ jobs:
           west update
           python -m pip install -r zephyr/scripts/requirements.txt
 
-      - name: Activate Arm Compiler license
-        if: matrix.solution.compiler == 'AC6'
-        uses: ARM-software/cmsis-actions/armlm@v1
-
       - name: Build
         env:
           ZEPHYR_BASE: ${{ github.workspace }}/zephyrproject/zephyr
         run: >-
-          cbuild ${{ matrix.solution.file }}
+          cbuild zephyr.csolution.yml
           --packs
           --context "${{ matrix.project }}.${{ matrix.build-type }}+${{ matrix.target }}"
 
@@ -86,6 +73,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: ${{ matrix.project }}-${{ matrix.build-type }}-${{ matrix.target }}-${{ matrix.solution.compiler }}
+          name: ${{ matrix.project }}-${{ matrix.build-type }}-${{ matrix.target }}
           path: out
           include-hidden-files: true
