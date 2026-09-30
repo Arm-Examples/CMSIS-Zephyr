@@ -7,7 +7,7 @@
 
 [<img src="./images/preview.png" alt="Overview of Zephyr capabilities in Keil Studio" width="330" height="205" align="left">](https://armkeil.blob.core.windows.net/developer/Files/videos/KeilStudio/CMSIS-Zephyr.mp4 "Overview of Zephyr capabilities in Keil Studio")
 
-This repository contains two basic Zephyr examples configured in the [`zephyr.csolution.yml`](./zephyr.csolution.yml) file for multiple development boards. It uses the GCC toolchain, [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), and the Zephyr `west` build system to generate the application image.
+This repository contains two basic Zephyr examples configured in the [`zephyr.csolution.yml`](./zephyr.csolution.yml) file for multiple development boards. It uses the GCC toolchain, [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), and Zephyr's `west` build system to generate the application image.
 
 The [Arm CMSIS Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.vscode-cmsis-debugger) provides kernel-aware debugging and views for device peripherals, including the interrupt system. It is used to download and run the application on target hardware.
 
@@ -17,9 +17,9 @@ Overall, Zephyr development is simplified by managing different build configurat
 
 ## CMSIS-Toolbox Integration
 
-Zephyr and West remain responsible for configuring and building the Zephyr application. The [`zephyr.csolution.yml`](./zephyr.csolution.yml) file adds [common project information](https://open-cmsis-pack.github.io/cmsis-toolbox/overview/#common-project-information-for-the-development-workflow) for the selectable application configurations and their target hardware.
+Zephyr and `west` remain responsible for configuring and building the Zephyr application. The [`zephyr.csolution.yml`](./zephyr.csolution.yml) file adds [common project information](https://open-cmsis-pack.github.io/cmsis-toolbox/overview/#common-project-information-for-the-development-workflow) for the selectable application configurations and their target hardware.
 
-CMSIS-Toolbox uses the same common project information in VS Code, command-line, and CI/DevOps workflows. CMSIS Packs provide device and board data that complements the Zephyr build information with programming, run, and debug configuration, peripheral views, and trace configuration. Generated files such as `compile_commands.json` and `*.cbuild-run.yml` connect smart editor features, static code analysis and test tools, target deployment, and trace to the application development workflow without replacing Zephyr or West.
+CMSIS-Toolbox uses the same common project information in VS Code, command-line, and CI/DevOps workflows. CMSIS-Packs provide device and board data that complements the Zephyr build information with programming, run, and debug configuration, peripheral views, and trace configuration. Generated files such as `compile_commands.json` and `*.cbuild-run.yml` connect smart editor features, static code analysis and test tools, target deployment, and trace to the application development workflow without replacing Zephyr or `west`.
 
 ## VS Code quick start
 
@@ -30,7 +30,7 @@ CMSIS-Toolbox uses the same common project information in VS Code, command-line,
 5. In the CMSIS view, use the [Action buttons](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#action-buttons) to build, load, and debug the example on your hardware.
 
 > [!TIP]
-> If configuration or build errors occur, use **Clean All 'out' and 'tmp' directories** from the CMSIS View menu to remove stale CMake cache files before rebuilding.
+> If configuration or build errors occur, use **Clean All 'out' and 'tmp' directories** from the CMSIS view menu to remove stale CMake cache files before rebuilding.
 
 ## Zephyr installation
 
@@ -82,7 +82,7 @@ continuing.
   Once activated, the shell prompt is prefixed with `(.venv)`. Activate the environment again whenever you open a
   new terminal. Run `deactivate` to leave it.
 
-- Install west. After activation, `python` refers to the virtual environment on every supported operating system:
+- Install `west`. After activation, `python` refers to the virtual environment on every supported operating system:
 
   ```console
   python -m pip install west
@@ -106,14 +106,14 @@ continuing.
 The CMSIS Solution extension needs the Zephyr workspace and virtual environment paths when it runs `west`.
 
 1. In VS Code, open **Settings** and search for **Cmsis-Csolution: Environment Variables**.
-2. Select the **User** or **Workspace** setting and choose **Add Item** for each variable below. Replace the example
-   prefix with the absolute path to your `zephyrproject` directory.
+2. Select the **User** or **Workspace** setting and choose **Add Item** for each variable below. Replace `<work-dir>`
+   with the directory in which you created your `zephyrproject` workspace.
 
    | Variable | Linux and macOS | Windows |
    |---|---|---|
-   | `ZEPHYR_BASE` | `/work/zephyrproject/zephyr` | `C:\work\zephyrproject\zephyr` |
-   | `PATH` | `/work/zephyrproject/.venv/bin` | `C:\work\zephyrproject\.venv\Scripts` |
-   | `VIRTUAL_ENV` | `/work/zephyrproject/.venv` | `C:\work\zephyrproject\.venv` |
+   | `ZEPHYR_BASE` | `/<work-dir>/zephyrproject/zephyr` | `C:\<work-dir>\zephyrproject\zephyr` |
+   | `PATH` | `/<work-dir>/zephyrproject/.venv/bin` | `C:\<work-dir>\zephyrproject\.venv\Scripts` |
+   | `VIRTUAL_ENV` | `/<work-dir>/zephyrproject/.venv` | `C:\<work-dir>\zephyrproject\.venv` |
 
 3. Fully restart VS Code so that the extension uses the new environment.
 
