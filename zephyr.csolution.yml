@@ -55,7 +55,7 @@ solution:
                     mode: stdio
                   - number: 1
                     mode: systemview
-            telnet:
+            stdio:
               - mode: console
           images:
             - project-context: blinky.Debug
@@ -109,7 +109,7 @@ solution:
                     mode: stdio
                   - number: 1
                     mode: systemview
-            telnet:
+            stdio:
               - mode: console
           images:
             - project-context: blinky.Debug-RTT
